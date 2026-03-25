@@ -1,0 +1,98 @@
+:root {
+    --text-color: #333333;
+    --bg-color: #f9f9f9;
+    --primary-color: #0056b3;
+    --accent-color: #e63946;
+    --table-border: #cccccc;
+    --table-bg-header: #e9ecef;
+
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+
+    --font-base: 1rem;      
+    --font-h1: 2.5rem;
+    --font-h2: 2rem;
+    --font-small: 0.875rem;
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, textad, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+html{font-size: 16px;}
+body{
+    width: 1000px;
+    max-width: 100%;
+    margin: 0 auto;
+    line-height: 1.5;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif;
+}
+strong, b {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+em, i {
+    font-style: italic;
+    font-size: 1.05rem;
+}
+
+ol, ul {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-lg);
+}
+
+ul {
+    list-style-type: square;
+    color: var(--primary-color);
+}
+
+ul li span {
+    color: var(--text-color);
+}
+
+ol {
+    list-style-type: lower-roman;
+}
+
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%; 
+    margin-bottom: var(--spacing-lg);
+}
+
+th, td {
+    padding: var(--spacing-md);
+    border: 0.0625rem solid var(--table-border); 
+    text-align: left;
+}
+
+th {
+    background-color: var(--table-bg-header);
+    font-weight: bold;
+    font-size: 1.1rem;
+}

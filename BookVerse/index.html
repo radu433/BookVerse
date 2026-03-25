@@ -19,30 +19,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./resurse/css/nav.css" type="text/css">
     <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="./resurse/css/general.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <meta name="msapplication-TileColor" content="#1d3557"> <title>BookVerse - Homepage</title>
-    <nav>
-            <ul class="menu">
-                <li>
-                    <a href="index.html">Acasă</a>
-                    
-                    <ul>
-                        <li><a href="#harta-interactiva">Prezentare generală</a></li>
-                        <li><a href="#categorii-principale">Categorii și Servicii</a></li>
-                    </ul>
-                </li>
-                
-                <li><a href="produse.html">Produse</a></li>
-                <li><a href="trade-in.html">Trade-In</a></li>
-                <li><a href="cos.html">Coș de cumpărături</a></li>
-                <li><a href="cont.html">Cont utilizator</a></li>
-            </ul>
-        </nav>
+    
 </head>
 <body>
+    <div id="watermark-print">
+    Moraru<br>Radu Andrei
+</div>
     <header>
+        <nav>
+            <input type="checkbox" id="btn-menu">
+        <label for="btn-menu" class="btn-burger">
+            <span class="bara"></span>
+            <span class="bara"></span>
+            <span class="bara"></span>
+        </label>
+            <ul class="menu">
+              <li>
+            <a href="index.html"><i class="fa-solid fa-bookmark"></i> <span>Acasă</span></a>
+        </li>
+
+        <li class="has-submenu">
+            <a href="#"><i class="fa-solid fa-books"></i> <span>Rafturi</span></a>
+            <ul class="submenu">
+                <li><a href="produse.html">Toate Titlurile</a></li> <li><a href="pachete.html">Pachete Promo</a></li> <li><a href="reviste.html">Reviste Științifice</a></li> </ul>
+        </li>
+
+        <li class="has-submenu">
+            <a href="trade-in.html"><i class="fa-solid fa-rotate"></i> <span>Trade-In</span></a>
+            <ul class="submenu">
+                <li><a href="trade-in.html#explicatie">Cum funcționează</a></li> <li><a href="trade-in.html#formular">Evaluare Carte</a></li> <li><a href="trade-in.html#reguli">Reguli Acceptare</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="cos.html"><i class="fa-solid fa-cart-flatbed-suitcases"></i> <span>Coșul meu</span></a> </li>
+    </ul>
+        </nav>
         <hgroup>
         <h1>Bookverse</h1>
         <p>Descoperă cele mai noi titluri <i>bestseller</i> și bucură-te de sistemul nostru avantajos de <i>trade-in</i> pentru cărțile citite.</p>
@@ -445,7 +462,7 @@
         <p>Adresă sediu central:</p>
         
         <div class="harta-locatie" style="margin-top: 20px; margin-bottom: 20px;">
-            <p><strong> Vino să ne vizitezi sediul central:</strong></p>
+            <p><strong> Vino să ne vizitezi sediul central:</strong> <i>Bulevardul Iuliu Maniu 15, București</i></p>
             <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.9549797243835!2d26.03821987666121!3d44.43408570157645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b201f609995a6f%3A0x8a7b024778b7d337!2sPolitehnica%20Business%20Tower!5e0!3m2!1sen!2sro!4v1772649127542!5m2!1sen!2sro" 
                 width="600" 
@@ -466,6 +483,7 @@
     <p><small>Copyright © 2026 Moraru Radu Andrei.<br>
         Pagină creată pe data de: <time datetime="2026-02-28">28 Februarie 2026</time>.
     </small></p>
+   <small> <p id="banner-scolar">Acesta este un proiect școlar!</p></small>
 </footer>
 </body>
 </html>

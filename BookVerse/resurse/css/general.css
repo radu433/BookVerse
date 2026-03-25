@@ -1,4 +1,3 @@
-
 html{
     font-size: 18px;
     transition: font-size 0.5s ease-in-out;
@@ -49,7 +48,6 @@ main>section, main>article, main>aside {
     box-sizing: border-box;
 }
 
-
 #harta-interactiva      { grid-area: z1-prezentare; }
 #zona2-tabele           { grid-area: z2-tabel; } 
 #evenimente             { grid-area: z3-calendar; }
@@ -74,7 +72,6 @@ main>section, main>article, main>aside {
     justify-content: space-evenly;
     gap: 30px;
 }
-
 
 main {
     margin-left: var(--margine-pagina);
@@ -110,7 +107,6 @@ main {
 #tab-orar-simplu td { padding: 12px 15px; border: 1px solid var(--culoare-contur); }
 #tab-orar-simplu tfoot td { background-color: var(--culoare-contur); color: white; font-style: italic; font-size: 0.95rem; }
 
-
 #tab-oferte {
     width: 100%;
     border-collapse: collapse; 
@@ -137,6 +133,7 @@ main {
 .formular-abonare input { flex: 1; padding: 12px 15px; border: 2px solid var(--culoare-contur); border-radius: 25px; font-family: inherit; outline: none; }
 .formular-abonare button { background-color: var(--culoare-accent); color: white; border: none; padding: 12px 25px; border-radius: 25px; font-family: inherit; font-weight: bold; cursor: pointer; transition: background-color 0.3s, transform 0.2s; }
 .formular-abonare button:hover { background-color: #c96b50; transform: scale(1.05); }
+
 :root {
     --culoare-text-principal: #2d5d6c; 
     --culoare-uzura: #d9534f;
@@ -197,6 +194,7 @@ math .operator {
     padding: 0 0.5rem;
     font-size: 1.3rem;
 }
+
 #link-top{
     position: fixed;
     bottom: 30px;
@@ -273,6 +271,7 @@ math .operator {
     position: relative;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
+
 @media screen and (max-width: 1200px) {
     html { font-size: 16px; } 
     body { --margine-pagina: 40px; --gap-celule: 15px; }
@@ -316,5 +315,107 @@ math .operator {
             "playlist"
             "documente"
             "z8-club";
+    }
+}
+
+#watermark-print, #banner-scolar {
+    display: none;
+}
+
+@media print {
+    #watermark-print, #banner-scolar {
+        display: block;
+    }
+
+    @page :left {
+        margin: 1cm 1cm 1cm 2cm; 
+    }
+    @page :right {
+        margin: 1cm 2cm 1cm 1cm;
+    }
+
+    body {
+        position: relative;
+    }
+    #banner-scolar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%; 
+        border: 4px double black; 
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+        font-weight: bold;
+        background-color: white;
+        color: black;
+    }
+
+    img, video, iframe, object, map, area, #link-top, .imagine-harta, .container-iframe {
+        display: none !important;
+    }
+
+    main {
+        display: block !important;
+    }
+    main > section, main > article, main > aside {
+        display: block !important;
+        page-break-inside: avoid; 
+        margin-bottom: 20px;
+        border: 1px solid #ccc; 
+    }
+    a {
+        color: black !important;
+        text-decoration: none !important;
+        font-weight: normal !important;
+    }
+    h1 {
+        text-align: center !important;
+        margin-top: 60px; 
+    }
+    header nav {
+        display: block !important;
+        break-after: page;
+    }
+    header nav .menu {
+        display: block !important; 
+        padding-left: 0;
+    }
+    header nav .menu li {
+        display: block !important;
+        border: none !important;
+        height: auto !important;
+        text-align: left !important;
+        padding: 5px 0 !important;
+    }
+    header nav .submenu {
+        display: block !important;
+        position: static !important; 
+        transform: none !important; 
+        padding-left: 40px !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .btn-burger { display: none !important; }
+    footer {
+        break-before: page; 
+        border-top: 2px solid black;
+        color: black !important;
+    }
+    #watermark-print {
+        position: fixed;
+        top: 45%; 
+        left: 20%;
+        width: 60%; 
+        height: 10%; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.3); 
+        z-index: -100; 
+        pointer-events: none;
     }
 }
