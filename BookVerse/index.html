@@ -13,72 +13,61 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./resurse/imagini/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="BookVerse" />
     <link rel="manifest" href="./resurse/imagini/site.webmanifest" />
-    <link rel="stylesheet" href="./resurse/css/general.css" type="text/css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./resurse/css/nav.css" type="text/css">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="./resurse/css/general.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <meta name="msapplication-TileColor" content="#1d3557"> <title>BookVerse - Homepage</title>
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <link rel="stylesheet" href="./resurse/css/general.css" type="text/css">
+    <link rel="stylesheet" href="./resurse/css/nav.css" type="text/css">
     
+    <meta name="msapplication-TileColor" content="#1d3557"> 
+    <title>BookVerse - Homepage</title>
 </head>
 <body>
     <div id="watermark-print">
-    Moraru<br>Radu Andrei
-</div>
+        Moraru<br>Radu Andrei
+    </div>
+    
     <header>
+        <hgroup>
+            <h1>Bookverse</h1>
+            <p>Descoperă cele mai noi titluri <i>bestseller</i> și bucură-te de sistemul nostru avantajos de <i>trade-in</i> pentru cărțile citite.</p>
+        </hgroup>
+
         <nav>
             <input type="checkbox" id="btn-menu">
-        <label for="btn-menu" class="btn-burger">
-            <span class="bara"></span>
-            <span class="bara"></span>
-            <span class="bara"></span>
-        </label>
+            <label for="btn-menu" class="btn-burger">
+                <span class="bara"></span>
+                <span class="bara"></span>
+                <span class="bara"></span>
+            </label>
+            
             <ul class="menu">
-              <li>
-            <a href="index.html"><i class="fa-solid fa-bookmark"></i> <span>Acasă</span></a>
-        </li>
-
-        <li class="has-submenu">
-            <a href="#"><i class="fa-solid fa-books"></i> <span>Rafturi</span></a>
-            <ul class="submenu">
-                <li><a href="produse.html">Toate Titlurile</a></li> <li><a href="pachete.html">Pachete Promo</a></li> <li><a href="reviste.html">Reviste Științifice</a></li> </ul>
-        </li>
-
-        <li class="has-submenu">
-            <a href="trade-in.html"><i class="fa-solid fa-rotate"></i> <span>Trade-In</span></a>
-            <ul class="submenu">
-                <li><a href="trade-in.html#explicatie">Cum funcționează</a></li> <li><a href="trade-in.html#formular">Evaluare Carte</a></li> <li><a href="trade-in.html#reguli">Reguli Acceptare</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="cos.html"><i class="fa-solid fa-cart-flatbed-suitcases"></i> <span>Coșul meu</span></a> </li>
-    </ul>
-        </nav>
-        <hgroup>
-        <h1>Bookverse</h1>
-        <p>Descoperă cele mai noi titluri <i>bestseller</i> și bucură-te de sistemul nostru avantajos de <i>trade-in</i> pentru cărțile citite.</p>
-        </hgroup>
-        <nav>
-            <ul>
                 <li>
-                    <a href="index.html">Acasă</a>
-                    
-                    <ul>
-                        <li><a href="#prezentare-generala">Prezentare generală</a></li>
-                        <li><a href="#categorii-principale">Categorii și Servicii</a></li>
+                    <a href="index.html"><i class="fa-solid fa-bookmark"></i> <span>Acasă</span></a>
+                </li>
+                <li class="has-submenu">
+                    <a href="#"><i class="fa-solid fa-books"></i> <span>Rafturi</span></a>
+                    <ul class="submenu">
+                        <li><a href="produse.html">Toate Titlurile</a></li> 
+                        <li><a href="pachete.html">Pachete Promo</a></li> 
+                        <li><a href="reviste.html">Reviste Științifice</a></li> 
                     </ul>
                 </li>
-                
-                <li><a href="produse.html">Produse</a></li>
-                <li><a href="trade-in.html">Trade-In</a></li>
-                <li><a href="cos.html">Coș de cumpărături</a></li>
-                <li><a href="cont.html">Cont utilizator</a></li>
+                <li class="has-submenu">
+                    <a href="trade-in.html"><i class="fa-solid fa-rotate"></i> <span>Trade-In</span></a>
+                    <ul class="submenu">
+                        <li><a href="trade-in.html#explicatie">Cum funcționează</a></li> 
+                        <li><a href="trade-in.html#formular">Evaluare Carte</a></li> 
+                        <li><a href="trade-in.html#reguli">Reguli Acceptare</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="cos.html"><i class="fa-solid fa-cart-flatbed-suitcases"></i> <span>Coșul meu</span></a> 
+                </li>
             </ul>
         </nav>
     </header>

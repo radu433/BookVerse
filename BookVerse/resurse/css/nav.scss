@@ -8,7 +8,7 @@ $cream-paper: #F4EFE6;
     align-items: center;
 }
 
-// Animația pentru apariția barelor de hamburger
+
 @keyframes aparitie-hamburger {
     0% {
         opacity: 0;
@@ -24,6 +24,20 @@ $cream-paper: #F4EFE6;
         opacity: 1;
         transform: translateX(0) scale(1);
         background-color: white;
+    }
+}
+
+
+@keyframes deschidere-meniu-mobil {
+    0% {
+        clip-path: polygon(0 0, 0 50%, 0 100%);
+    }
+    50% {
+        
+        clip-path: polygon(0 0, 100% 50%, 0 100%);
+    }
+    100% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 }
 
@@ -126,17 +140,15 @@ nav {
                 width: 100%;
                 height: 4px;
                 border-radius: 4px;
-                opacity: 0; // Stau invizibile pana incepe animatia
+                opacity: 0; 
                 background-color: white;
 
                 &:nth-child(1) { top: 0; }
                 &:nth-child(2) { top: 50%; transform: translateY(-50%); }
                 &:nth-child(3) { bottom: 0; }
 
-                // Apelăm animația de minim 3 cadre
                 animation: aparitie-hamburger 0.8s ease forwards;
 
-                // Bucla repetitivă SASS pentru delay
                 @for $i from 1 through 3 {
                     &:nth-child(#{$i}) {
                         animation-delay: #{$i * 0.2}s; 
@@ -144,24 +156,36 @@ nav {
                 }
             }
         }
+
         #btn-menu:checked ~ .menu {
             display: flex;
             flex-direction: column;
+            animation: deschidere-meniu-mobil 0.5s ease-out forwards;
         }
+
         .menu {
             display: none; 
             background-color: var(--culoare-header-footer);
 
             li {
                 width: 100%;
-                a { padding: 1rem; }
+                a { 
+                    padding: 1rem; 
+                    text-align: center;
+                }
             }
 
             .submenu {
                 position: static;
                 transform: none;
                 width: 100%;
-                clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 15%);
+                clip-path: none;
+                
+                li a {
+                    text-align: center;
+                    background-color: rgba(255, 255, 255, 0.1);
+                    color: white;
+                }
             }
         }
     }
