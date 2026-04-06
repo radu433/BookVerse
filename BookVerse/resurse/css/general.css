@@ -73,16 +73,12 @@ main>section, main>article, main>aside {
     gap: 30px;
 }
 
-/* ======================================================== */
-/* AICI ESTE MODIFICAREA PENTRU A LĂȚI MAIN-UL PE ECRAN MARE */
-/* ======================================================== */
 main {
-    width: 95%; /* Pe ecrane gigant, va ocupa 95% din latime */
-    max-width: 1800px; /* Am marit limita de la 1200 la 1800 */
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    width: 95%;  
+    max-width: 1600px;
+    margin:auto;
+    padding: 10px;
+    box-sizing: border-box;
 
     display: grid;
     gap: var(--gap-celule);
@@ -90,6 +86,7 @@ main {
     
     grid-template-areas:
         "z1-prezentare z1-prezentare z1-prezentare z1-prezentare" 
+        "video-sec video-sec video-sec video-sec"
         "z5-useri z6-statistici z6-statistici z7-server"          
         "z3-calendar z3-calendar z2-tabel z2-tabel"                
         "z4-anunturi z4-anunturi z2-tabel z2-tabel"                
@@ -100,10 +97,10 @@ main {
         "z8-club z8-club z8-club z8-club";
 }
 
-/* REPARAȚIA PENTRU PAGINILE FĂRĂ GRID (Eroare, Despre Noi) */
+
 .pagina-eroare, #istoric-firma {
     grid-column: 1 / -1 !important; 
-    max-width: 100% !important; /* Lasa cutiile unice sa se intinda */
+    max-width: 100% !important; 
     margin: 40px auto !important;
 }
 
