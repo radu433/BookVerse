@@ -73,9 +73,14 @@ main>section, main>article, main>aside {
     gap: 30px;
 }
 
+/* ======================================================== */
+/* AICI ESTE MODIFICAREA PENTRU A LĂȚI MAIN-UL PE ECRAN MARE */
+/* ======================================================== */
 main {
-    margin-left: var(--margine-pagina);
-    margin-right: var(--margine-pagina);
+    width: 95%; /* Pe ecrane gigant, va ocupa 95% din latime */
+    max-width: 1800px; /* Am marit limita de la 1200 la 1800 */
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 20px;
     margin-bottom: 20px;
 
@@ -93,6 +98,13 @@ main {
         "ambianta ambianta playlist playlist"
         "documente documente documente documente"
         "z8-club z8-club z8-club z8-club";
+}
+
+/* REPARAȚIA PENTRU PAGINILE FĂRĂ GRID (Eroare, Despre Noi) */
+.pagina-eroare, #istoric-firma {
+    grid-column: 1 / -1 !important; 
+    max-width: 100% !important; /* Lasa cutiile unice sa se intinda */
+    margin: 40px auto !important;
 }
 
 .container-tabel {
@@ -277,6 +289,9 @@ math .operator {
     body { --margine-pagina: 40px; --gap-celule: 15px; }
 
     main {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
             "z1-prezentare z1-prezentare"
@@ -418,4 +433,46 @@ math .operator {
         z-index: -100; 
         pointer-events: none;
     }
+}a:visited {
+    color: var(--culoare-contur); 
+}
+
+
+a[href^="http"]::before {
+    content: "⮳ ";
+    font-size: 1.5em; 
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+
+a[href^="http"]:hover::before {
+    color: var(--culoare-primara);
+}
+
+
+main a {
+    display: inline-block;
+    padding: 2px 6px;
+    border: 2px solid transparent;
+    
+   
+    background-image: radial-gradient(circle, var(--culoare-accent) 0%, var(--culoare-accent) 40%, transparent 80%, transparent 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0%; 
+    
+    transition: background-size 0.4s ease, color 0.3s ease;
+    border-radius: 5px;
+}
+
+
+main a:hover {
+    background-size: 100%;
+    color: white; 
+}
+
+
+main a:active {
+    border: 2px solid var(--culoare-primara);
 }

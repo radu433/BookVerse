@@ -2,12 +2,39 @@
   "name": "bookverse",
   "version": "1.0.0",
   "description": "Libraria BookVerse",
+  "keywords": [
+    "Bookverse",
+    "librarie",
+    "online",
+    "magazin",
+    "carti",
+    "reviste",
+    "online",
+    "publicatii",
+    "online",
+    "reduceri",
+    "carti",
+    "trade-in",
+    "carti",
+    "carti",
+    "populare",
+    "oferte",
+    "carti",
+    "cumpara",
+    "carti",
+    "rapid"
+  ],
+  "license": "ISC",
+  "author": "Moraru Radu Andrei",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "ejs": "^3.1.9",
-    "express": "^4.18.2"
+    "ejs": "^3.1.10",
+    "express": "^4.22.1",
+    "sass": "^1.99.0",
+    "sharp": "^0.34.5"
   }
 }

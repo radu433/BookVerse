@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>BookVerse - Homepage</title>
+    <%- include('../fragmente/head.ejs') %>
+</head>
+<body>
+
+    <%- include('../fragmente/header.ejs') %>
+
+     <main>
+     <section id="harta-interactiva">
+            <div class="text-prezentare">
+                <h2>Bun venit la BookVerse!</h2>
+                <p>Bucuria lecturii te așteaptă. Descoperă mii de titluri, bestseller-uri și oferte speciale în librăria noastră online.</p>
+                <p><strong>Explorează vizual:</strong> Dă click pe rafturile din imaginea alăturată pentru a naviga rapid către secțiunile dorite (Program, Evenimente, Cartea Săptămânii).</p>
+            </div>
+            
+            <div class="imagine-harta">
+                <img src="./resurse/imagini/biblioteca-virtuala_large.jpg" usemap="#image-map" alt="Hartă interactivă a bibliotecii">
+                <map name="image-map">
+                    <area shape="rect" coords="298,0,730,583" href="#orar" alt="Program de Funcționare BookVerse" title="Mergi la Program de Funcționare BookVerse">
+                    <area shape="rect" coords="0,0,290,580" href="#evenimente" alt="Evenimente și Noutăți BookVerse" title="Mergi la Evenimente și Noutăți BookVerse">
+                    <area shape="rect" coords="736,9,1006,579" href="#cartea-saptamanii" alt="Cartea Săptămânii" title="Mergi la Cartea Săptămânii">
+                </map>
+            </div>
+        </section>
+        </div> </section> <section id="prezentare-video" style="grid-column: 1 / -1; text-align: center; padding: 20px;">
+            <h2 style="color: var(--culoare-primara); margin-bottom: 10px;">Prezentare BookVerse</h2>
+            <p style="margin-bottom: 15px; border: none;">Urmărește un scurt videoclip despre librăria noastră:</p>
+            
+            <video preload="metadata" controls poster="/resurse/imagini/poster-video.jpg" style="width: 100%; max-width: 800px; margin: 0 auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <source src="/resurse/video/prezentare.mp4" type="video/mp4">
+                <source src="/resurse/video/prezentare.webm" type="video/webm">
+                <track src="/resurse/vtt/bookverse-ro.vtt" kind="captions" srclang="ro" label="Română" default>
+                <track src="/resurse/vtt/bookverse-en.vtt" kind="captions" srclang="en" label="English">
+                Browser-ul tău nu suportă elementul video.
+            </video>
+        </section>
+   <section id="categorii-principale">
+            <h2>Categorii și Servicii</h2>
+            <p>Explorați selecția noastră vastă sau folosiți serviciile noastre speciale pentru a găsi exact ceea ce căutați.</p>
+
+            <article>
+                <h3>Publicații și Cărți</h3>
+                <p>Oferim o gamă variată care include manuale, cărți științifice, beletristică, dar și reviste culturale sau de tehnologie.</p>
+            </article>
+
+            <article>
+                <h3>Pachete Promoționale</h3>
+                    <p>Profită acum de oferta lunii: Pachetul de literatură clasică este redus de la <s>150 RON</s> la <ins>99 RON</ins>!</p>
+            </article>
+
+            <aside>
+                <h3>Sistemul Trade-In</h3>
+                <p>O funcționalitate distinctă a site-ului nostru: aduceți cărțile second-hand și beneficiați de reduceri la noile achiziții prin serviciul nostru de schimb.</p>
+                <div id="formula-calcul" style="margin-top: 20px; padding: 10px; background-color: #f9f9f9; border-left: 4px solid #333;">
+            <h3>Cum calculăm valoarea cărții tale?</h3>
+            <p>Pentru transparență totală, folosim următoarea formulă matematică pentru a stabili valoarea voucherului tău:</p>
+            
+            <div class="container-formula-voucher">
+                <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                    
+                    <mi class="rezultat-voucher">Voucher</mi>
+                    
+                    <mo class="operator">=</mo>
+                    
+                    <mfrac>
+                    <msub class="pret-baza">
+                        <mi>Preț</mi>
+                        <mtext>bază</mtext>
+                    </msub>
+                    <mn class="numar-impartitor">2</mn>
+                    </mfrac>
+                    
+                    <mo class="operator">-</mo>
+                    
+                    <mi class="variabila-uzura">Uzură</mi>
+                    
+                    <mo class="operator">+</mo>
+                    
+                    <mi class="variabila-bonus">Bonus</mi>
+                    
+                </math>
+                </div>
+            <p><small>*Unde uzura se scade în funcție de starea fizică a cărții, iar bonusul se acordă pentru ediții rare.</small></p>
+        </div>
+                <p><strong>Atenție:</strong> Cărțile care prezintă pagini rupte, lipsă sau coperți distruse complet NU vor fi acceptate pentru evaluare!</p>
+            </aside>
+            
+        </section>
+        <aside id="zona2-tabele">
+            
+            <section id="orar" style="border: none; box-shadow: none; padding: 0;">
+                <h2>Program de Funcționare BookVerse</h2>
+                <p>Consultați orarul nostru pentru suport clienți și evaluarea cărților prin sistemul Trade-In:</p>
+                
+                <div class="container-tabel">
+                    <table id="tab-orar-simplu">
+                        <caption>Orar Suport Clienți și Recepție Colete</caption>
+                        <thead>
+                            <tr>
+                                <th>Cod</th>
+                                <th>Perioadă</th>
+                                <th>Zi</th>
+                                <th>Interval dimineață</th>
+                                <th>Pauză de masă</th>
+                                <th>Interval seară</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td rowspan="5">Zile<br/>Lucrătoare</td>
+                                <td>Luni</td>
+                                <td>10-12</td>
+                                <td>12-14</td>
+                                <td>14-20</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Marți</td>
+                                <td>9-12</td>
+                                <td>12-14</td>
+                                <td>14-21</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Miercuri</td>
+                                <td>9-11</td>
+                                <td>11-13</td>
+                                <td>14-21</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Joi</td>
+                                <td>9-11</td>
+                                <td>11-13</td>
+                                <td>14-21</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Vineri</td>
+                                <td>9-12</td>
+                                <td>12-14</td>
+                                <td>14-19</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td rowspan="2">Weekend</td>
+                                <td>Sâmbătă</td>
+                                <td>10-12</td>
+                                <td>12-13</td>
+                                <td>13-16</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Duminică</td>
+                                <td>10-14</td>
+                                <td>-</td>
+                                <td>Închis</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">Închis cu ocazia sărbătorilor legale, sau când suntem prea prinși citind o carte bună.</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            <section id="oferte-abonamente" style="border: none; box-shadow: none; padding: 0;">
+                <h2>Abonamente și Oferte BookVerse</h2>
+                <p>Alege planul perfect pentru obiceiurile tale de lectură și bucură-te de avantaje exclusive:</p>
+                
+                <div class="container-tabel">
+                    <table id="tab-oferte">
+                        <caption>* Prețurile includ TVA. Pachetele anuale beneficiază de o lună gratuită la reînnoire.</caption>
+                        
+                        <thead>
+                            <tr>
+                                <th>Nume Pachet</th>
+                                <th>Beneficii Incluse</th>
+                                <th>Tip Livrare</th>
+                                <th>Preț Lunar</th>
+                            </tr>
+                        </thead>
+                        
+                    <tbody>
+                            <tr>
+                                <td>Cititor Ocazional</td>
+                                <td>Acces la reduceri standard</td>
+                                <td>Standard (15 RON)</td>
+                                <td>Gratuit</td>
+                            </tr>
+                            <tr>
+                                <td>Explorator</td>
+                                <td>1 Carte fizică cadou / lună</td>
+                                <td>Standard (15 RON)</td>
+                                <td>39 RON</td>
+                            </tr>
+                            <tr>
+                                <td>Avid Reader</td>
+                                <td>3 Cărți cadou + Trade-In VIP</td>
+                                <td>Gratuită (Prioritară)</td>
+                                <td>89 RON</td>
+                            </tr>
+                            <tr>
+                                <td>Colecționar</td>
+                                <td>5 Cărți + Acces la evenimente</td>
+                                <td>Gratuită (Prioritară)</td>
+                                <td>149 RON</td>
+                            </tr>
+                        </tbody>
+                        
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">Reducere pentru elevi, studenți și profesori (pe baza legitimației)</td>
+                                <td>-15%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+        </aside>
+        <section id="cartea-saptamanii">
+    <h2>Cartea Săptămânii</h2>
+    
+    <p>Săptămâna aceasta vă recomandăm un bestseller internațional care nu trebuie să lipsească din nicio bibliotecă.</p>
+    <section id="status-stocuri">
+            <h2>Statistici și Recenzii</h2>
+            <p>Verifică evaluările cititorilor și disponibilitatea pentru cele mai căutate volume din această lună:</p>
+            <article>
+                <h3>Dune - Frank Herbert</h3>
+                <p>
+                    <strong>Scor recenzii:</strong> 
+                    <meter min="0" max="5" value="4.8" title="4.8 din 5 stele">4.8/5</meter> 
+                    (4.8 din 5 stele)
+                </p>
+                <p>
+                    <strong>Stoc depozit:</strong> 
+                    <meter min="0" max="100" value="15" low="20" high="80" optimum="100" title="Stoc limitat! Mai sunt doar 15 exemplare.">15%</meter> 
+                    <span style="color: red;">(Stoc critic! Doar 15 exemplare rămase)</span>
+                </p>
+            </article>
+            <article style="margin-top: 15px;">
+                <h3>Atomic Habits - James Clear</h3>
+                <p>
+                    <strong>Scor recenzii:</strong> 
+                    <meter min="0" max="5" value="4.9" title="4.9 din 5 stele">4.9/5</meter> 
+                    (4.9 din 5 stele)
+                </p>
+                <p>
+                    <strong>Stoc depozit:</strong> 
+                    <meter min="0" max="100" value="85" low="20" high="80" optimum="100" title="Stoc suficient">85%</meter> 
+                    <span style="color: green;">(În stoc)</span>
+                </p>
+            </article>
+        </section>
+    <blockquote>
+        "O capodoperă absolută a literaturii moderne! M-a ținut cu sufletul la gură de la prima până la ultima pagină. Recomand cu căldură serviciul BookVerse pentru livrarea rapidă." <br>
+        - Maria Popescu, client verificat
+    </blockquote>
+    <section id="evenimente">
+           <h2><i class="fa-solid fa-bell fa-shake" style="color: #E67E22;"></i> Evenimente și Noutăți BookVerse</h2>
+            <p>Fii la curent cu cele mai noi oferte din <b>libraria noastra online</b>. Participă la evenimentele lunare pentru a prinde cele mai bune <b>reduceri la carti</b> și publicații!</p>
+            
+            <ul>
+                <li>
+                    <time datetime="2024-04-15T10:00">15 Aprilie, ora 10:00</time> - 
+                    <b>Lansarea programului Trade-In</b>: Vino cu vechile tale manuale și profită de sistemul nostru de <b>trade-in carti</b> pentru a primi vouchere la noile tale achiziții.
+                </li>
+                <li>
+                    <time datetime="2024-04-23T12:00">23 Aprilie, ora 12:00</time> - 
+                    <b>Ziua Internațională a Cărții</b>: Oferim transport gratuit pentru orice <b>cumpara carti rapid</b> de pe site-ul nostru, fie că alegi beletristică sau <b>reviste online</b>.
+                </li>
+                <li>
+                    <time datetime="2024-05-01T09:00">1 Mai, ora 09:00</time> - 
+                    <b>Târgul de Primăvară BookVerse</b>: Descoperă cel mai iubit <b>magazin carti</b> într-un format special, plin de <b>carti populare</b> și surprize!
+                </li>
+            </ul>
+        </section>
+        
+    <section id="resurse-utile">
+        <h2>Resurse și Materiale</h2>
+        <p>Pentru recenzii internaționale, vă încurajăm să verificați platforma <a href="https://www.goodreads.com" target="_blank">Goodreads</a>.</p>
+        <p>Află mai multe despre evoluția lecturii din acest articol: <br>
+               <a href="https://ro.wikipedia.org/wiki/Istoria_cărții#Antichitate">
+                   https://ro.wikipedia.org/<wbr>wiki/<wbr>Istoria_cărții<wbr>#Antichitate
+               </a>
+            </p>
+            <section id="faq">
+            <h2>Întrebări Frecvente (FAQ)</h2>
+            <p>Ai neclarități? Găsești mai jos răspunsurile la cele mai comune curiozități ale cititorilor noștri:</p>
+
+            <details>
+                <summary> Cum funcționează exact sistemul Trade-In?</summary>
+                <p>Este foarte simplu! Ne trimiți prin curier cărțile pe care le-ai citit deja, echipa noastră le evaluează conform grilei, iar tu primești direct în contul tău vouchere de reducere. Acestea pot fi folosite pentru a cumpăra orice carte nouă din magazinul nostru.</p>
+            </details>
+
+            <details>
+                <summary> Care sunt costurile și termenii de livrare?</summary>
+                <p>Costul standard de livrare prin curier rapid este de 15 RON oriunde în țară (timp de livrare: 1-2 zile lucrătoare). Pentru comenzile care depășesc suma de 150 RON, livrarea este <b>complet gratuită</b>!</p>
+            </details>
+
+            <details>
+                <summary> Pot returna o carte dacă nu sunt mulțumit de starea ei?</summary>
+                <p>Absolut! Indiferent că ai cumpărat o publicație nouă sau una second-hand, dacă produsul nu corespunde așteptărilor tale, ai la dispoziție 14 zile calendaristice pentru a solicita un retur gratuit.</p>
+            </details>
+        </section>
+        <p>Dă click pe imaginea de mai jos pentru a o vedea la rezoluție maximă:</p>
+            <a href="./resurse/imagini/biblioteca-virtuala_large.jpg">
+                <img src="./resurse/imagini/carti-mic.jpg" alt="Click pentru mărire" style="width: 150px; border: 1px solid black;" />
+            </a>
+
+            <p style="margin-top: 15px;">
+                <a href="./resurse/imagini/oferta.txt" download="Catalog_Reduceri_BookVerse.txt">
+                     Descarcă de aici catalogul nostru de oferte
+                </a>
+            </p>    
+    </section>   
+        </section>
+      <section id="ambianta-lectura">
+            <h2>Ambianță pentru Lectură</h2>
+            <p>Alegeți fundalul sonor preferat pentru sesiunea de citit dând click pe tab-urile de mai jos:</p>
+            
+            <div class="container-iframe">
+                <div class="taburi-iframe">
+                    <a href="https://www.youtube.com/embed/L_LUpnjgPso?controls=1" target="ifr-video">🔥 Șemineu</a>
+                    <a href="https://www.youtube.com/embed/mPZkdNFkNps?controls=1" target="ifr-video">🌧️ Ploaie</a>
+                    <a href="https://www.youtube.com/embed/jfKfPfyJRdk?controls=1" target="ifr-video">☕ Cafenea</a>
+                </div>
+               
+                <iframe 
+                    name="ifr-video" 
+                    src="https://www.youtube.com/embed/L_LUpnjgPso?controls=1" 
+                    title="YouTube video player - Ambianță BookVerse" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+         <section id="playlist-ambiant">
+            <h2>Playlist Sunete  BookVerse</h2>
+            <p>Lasă grijile deoparte și scufundă-te în poveste. Am pregătit pentru tine coloana sonoră ideală, care să te însoțească și să îți contureze atmosfera perfectă pentru citit.</p>
+            
+    <iframe
+                    width="560" height="315" 
+            src="https://www.youtube.com/embed/jfKfPfyJRdk?playlist=mPZkdNFkNps,L_LUpnjgPso&autoplay=1&loop=1&controls=1&mute=1" 
+            title="Playlist Ambianță BookVerse" 
+            style="border: none;" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+</iframe>
+        </section>
+        <section id="documente-oficiale">
+    <h2>Termeni, Condiții și Retur</h2>
+    <p>Pentru o experiență de cumpărături cât mai plăcută, te rugăm să consulți politica magazinului nostru:</p>
+    <iframe 
+                src="./resurse/imagini/Termeni_și_Condiții.pdf" 
+                style="width: 100%; height: 500px; border: 1px solid var(--culoare-contur); border-radius: 8px;">
+            </iframe>
+            
+            <p style="text-align: center; margin-top: 10px;">
+                <small>Fără probleme, poți <a href="./resurse/imagini/termeni.pdf" download>descărca documentul de aici</a>.</small>
+            </p>
+        </section>
+        <section id="useri-online">
+    <h2> Utilizatori online </h2>
+    <p> În prezent sunt 43 de vizitatori activi pe BookVerse! Mulțumim!</p>
+        </section>
+
+        <section id="statistici-user">
+    <h2> Statistici Trade-In</h2>
+    <p> În această lună, prin programul nostru de Trade-in, ai economisit 150 de RON prin vânzarea celor 5 cărți cumpărate în această lună. </p>
+        </section>
+        <section id="club-lectura">
+            <h2> Clubul de Lectură BookVerse</h2>
+            <p>Alătură-te comunității noastre! Abonează-te la newsletter și primești <strong>10% reducere</strong> la prima comandă, plus recenzii în exclusivitate.</p>
+            
+            <form action="#" method="get" class="formular-abonare">
+                <input type="email" placeholder="Introdu adresa ta de e-mail..." required>
+                <button type="submit">Mă abonez</button>
+            </form>
+        </section> 
+        <section id="data-server">
+            <h2>Status Server</h2>
+            <p>Uptime server: 99.9%. Versiune platformă: v2.4.1. Trafic criptat: Activ.</p>
+
+        </section>
+    </main>
+
+    <%- include('../fragmente/footer.ejs') %>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title><%= titlu %> - BookVerse</title>
+    
+    <%- include('../fragmente/head.ejs') %>
+    
+    <style>
+        .pagina-eroare {
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 50vh;
+        }
+        .pagina-eroare h2 {
+            color: var(--terra-cotta);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .pagina-eroare p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .pagina-eroare img {
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('../fragmente/header.ejs') %>
+
+    <main>
+        <section class="pagina-eroare">
+            <h2><%= titlu %></h2>
+            <p><%= text %></p>
+            <img src="<%= imagine %>" alt="Eroare: <%= titlu %>">
+        </section>
+    </main>
+
+    <%- include('../fragmente/footer.ejs') %>
+
+</body>
+</html>
