@@ -1,0 +1,113 @@
+{
+  "cale_galerie": "resurse/imagini/galerie",
+  "imagini": [
+    {
+      "cale_imagine": "carte1.jpg",
+      "titlu": "Dimineața la lectură",
+      "descriere": "O carte deschisă cu pagini luminate de soarele dimineții.",
+      "sfert_ora": 1,
+      "licenta": "Pixabay (CC0)",
+      "link_licenta": "https://pixabay.com",
+      "alt": ""
+    },
+    {
+      "cale_imagine": "carte2.jpg",
+      "titlu": "Magia dintre pagini",
+      "descriere": "O ilustrație feerică ce sugerează că fiecare carte deschisă eliberează un univers de magie și posibilități infinite.",
+      "sfert_ora": 1,
+      "licenta": "Pexels (CC0)",
+      "link_licenta": "https://ro.pinterest.com/",
+      "alt": "O carte deschisă din care ies sclipiri magice de lumină, pe un fundal verde cu efect de bokeh"
+    },
+    {
+      "cale_imagine": "carte3.jpg",
+      "titlu": "Pauza de cafea",
+      "descriere": "O carte fascinantă așezată lângă o ceașcă fierbinte.",
+      "sfert_ora": 1,
+      "licenta": "Unsplash (Free)",
+      "link_licenta": "https://ro.pinterest.com/",
+      "alt": "Carte deschisa si cafea neagra"
+    },
+    {
+      "cale_imagine": "carte4.jpg",
+      "titlu": "Poveste la lumina lunii",
+      "descriere": "Liniștea deplină a serii oferă cadrul perfect pentru a te pierde printre rândurile unei cărți fascinante.",
+      "sfert_ora": 2,
+      "licenta": "Pixabay (CC0)",
+      "link_licenta": "https://pixabay.com",
+      "alt": "Plan apropiat cu o carte deschisă, cu paginile luminate discret pe un fundal întunecat și estompat"
+    },
+    {
+      "cale_imagine": "carte5.jpg",
+      "titlu": "Prospețimea lecturii",
+      "descriere": "O bibliotecă vibrantă unde nuanțele de turcoaz se împletesc cu elemente naturale, oferind o senzație de liniște și prospețime spațiului de studiu.",
+      "sfert_ora": 2,
+      "licenta": "Pexels (CC0)",
+      "link_licenta": "https://ro.pinterest.com/",
+      "alt": "Rafturi de lemn cu numeroase cărți având cotoare turcoaz și bleu, parțial acoperite de o frunză mare verde"
+    },
+    {
+      "cale_imagine": "carte6.jpg",
+      "titlu": "Simetria culorilor",
+      "descriere": "O colecție de volume organizate estetic, unde nuanțele de albastru și verde creează o armonie vizuală relaxantă pentru orice cititor.",
+      "sfert_ora": 2,
+      "licenta": "Pixabay (CC0)",
+      "link_licenta": "https://ro.pinterest.com/",  
+      "alt": "Rafturi de bibliotecă pline cu cărți având cotoare în diverse nuanțe de albastru, verde și turcoaz"
+    },
+    {
+      "cale_imagine": "carte7.jpg",
+      "titlu": "Poarta către universuri",
+      "descriere": "Fațada primitoare a unei librării clasice, iluminată cald, invitând trecătorii să descopere comorile ascunse printre rafturi.",
+      "sfert_ora": 3,
+      "licenta": "Pexels (CC0)",
+      "link_licenta": "https://ro.pinterest.com/",
+      "alt": "Vederea de afară a unei librării iluminate noaptea, cu vitrine mari și cărți expuse la intrare"
+    },
+    {
+      "cale_imagine": "carte8.jpg",
+      "titlu": "Sanctuarul cititorului",
+      "descriere": "Un spațiu cald și primitor, cu fotolii pufoase și rafturi ticsite de cărți, iluminat discret pentru o atmosferă de basm.",
+      "sfert_ora": 3,
+      "licenta": "Unsplash (Free)",
+      "link_licenta": "https://ro.pinterest.com/",
+      "alt": "Colț de lectură cu bean-bags, un covor oriental, rafturi înalte cu cărți și ghirlande de lumini calde"
+    },
+    {
+      "cale_imagine": "carte9.jpg",
+      "titlu": "Liniștea apusului",
+      "descriere": "O experiență de lectură imersivă pe malul lacului, sub culorile calde ale soarelui care apune.",
+      "sfert_ora": 3,
+      "licenta": "Pixabay (CC0)",
+      "link_licenta": "https://ro.pinterest.com/",
+      "alt": "O carte deschisă în prim-plan pe o masă de lemn, cu un lac și un apus de soare spectaculos în fundal"
+    },
+    {
+      "cale_imagine": "carte10.jpg",
+      "titlu": "Citit la gura sobei",
+      "descriere": "O seară confortabilă cu o carte bună și un șemineu aprins.",
+      "sfert_ora": 4,
+      "licenta": "Pexels (CC0)",
+      "link_licenta": "https://ro.pinterest.com/",
+      "alt": "Persoana citind langa un semineu"
+    },
+    {
+      "cale_imagine": "carte11.jpg",
+      "titlu": "Relaxare deplină",
+      "descriere": "O perspectivă detaliată asupra rafturilor de lemn masiv, pline cu volume de colecție.",
+      "sfert_ora": 4,
+      "licenta": "Pixabay (CC0)",
+      "link_licenta": "https://ro.pinterest.com/",
+      "alt": "Plan apropiat cu rafturi de biblioteca din lemn si carti colorate"
+    },
+    {
+      "cale_imagine": "carte12.jpg",
+      "titlu": "Studiu și tehnologie",
+      "descriere": "Momente de liniște în așternuturi primitoare, acompaniate de o carte bună sub lumina caldă a soarelui.",
+      "sfert_ora": 4,
+      "licenta": "Unsplash (Free)",
+      "link_licenta": "https://ro.pinterest.com/",
+      "alt": "O carte deschisă și o ceașcă de ceai pe un pat cu lenjerie albastră"
+    }
+  ]
+}

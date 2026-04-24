@@ -1,0 +1,39 @@
+$front-family-base:'Lora', serif;
+
+/* culori de background*/
+$primary: #2B6777;    /* Deep Teal - tema primary */
+$secondary: #52AB98;  /* Mint Green - tema secondary */
+$danger: #E27D60;     /* Terra Cotta - o folosim ca a treia temă/alertă */
+$light: #F4EFE6;      /* Cream - paper-like feel */
+
+/* C. Culori de font */
+$body-color: #2d5d6c; 
+$link-color: #E27D60;
+
+/* D. Dimensiuni de ecran diferite pentru ecrane medii (md) și mari (lg) */
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 800px,  /* Custom: Ecran mediu la 800px */
+  lg: 1200px, /* Custom: Ecran mare la 1200px */
+  xl: 1400px,
+  xxl: 1600px
+);
+
+/* E. Dimensiunea razelor de border */
+$border-radius: 1.5rem;
+
+/* F. Dimensiunea literelor headingurilor */
+$h1-font-size: 3.5rem;  
+$h2-font-size: 2.5rem;
+$h3-font-size: 2rem;
+
+/*activare umbre + tranzitii */
+$enable-shadows: true;
+$enable-transitions: true;
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+a{
+    text-decoration: none;
+}

@@ -11,11 +11,11 @@
      <main>
      <section id="harta-interactiva">
             <div class="text-prezentare">
-                <h2>Bun venit la BookVerse!</h2>
+                <h2 class="text-reflexie" data-text="Bun venit la BookVerse!">Bun venit la BookVerse!</h2>
                 <p>Bucuria lecturii te așteaptă. Descoperă mii de titluri, bestseller-uri și oferte speciale în librăria noastră online.</p>
                 <p><strong>Explorează vizual:</strong> Dă click pe rafturile din imaginea alăturată pentru a naviga rapid către secțiunile dorite (Program, Evenimente, Cartea Săptămânii).</p>
             </div>
-            
+        
             <div class="imagine-harta">
                 <img src="./resurse/imagini/biblioteca-virtuala_large.jpg" usemap="#image-map" alt="Hartă interactivă a bibliotecii">
                 <map name="image-map">
@@ -25,7 +25,12 @@
                 </map>
             </div>
         </section>
-        </div> </section> <section id="prezentare-video" style="grid-column: 1 / -1; text-align: center; padding: 20px;">
+        <section id="sectiune-galerie-statica">
+            <h2>Galerie Foto - BookVerse</h2>
+            <%- include("../fragmente/galerie.ejs") %>
+        </section>
+        </div> </section> 
+        <section id="prezentare-video" style="grid-column: 1 / -1; text-align: center; padding: 20px;">
             <h2 style="color: var(--culoare-primara); margin-bottom: 10px;">Prezentare BookVerse</h2>
             <p style="margin-bottom: 15px; border: none;">Urmărește un scurt videoclip despre librăria noastră:</p>
             
@@ -37,6 +42,32 @@
                 Browser-ul tău nu suportă elementul video.
             </video>
         </section>
+    <hr class="separator-balonase">
+    <section id="demo-bootstrap" class="container my-5 p-4 bg-light shadow">
+    <h1 class="text-primary text-center mb-4">Demo Bootstrap Custom</h1>
+    
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card h-100 border-secondary">
+                <div class="card-body">
+                    <h2 class="card-title text-secondary">Card cu colțuri mari</h2>
+                    <p class="card-text">Acest card folosește raza de border modificată (border-radius: 1.5rem) și fontul Lora.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <div class="alert alert-danger" role="alert">
+                Aceasta este o alertă folosind culoarea ta Accent (Terra Cotta)!
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="button">Buton Primary (Deep Teal)</button>
+                <button class="btn btn-secondary" type="button">Buton Secondary (Mint Green)</button>
+            </div>
+        </div>
+    </div>
+</section>
    <section id="categorii-principale">
             <h2>Categorii și Servicii</h2>
             <p>Explorați selecția noastră vastă sau folosiți serviciile noastre speciale pentru a găsi exact ceea ce căutați.</p>

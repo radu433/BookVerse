@@ -1,475 +1,873 @@
-html{
-    font-size: 18px;
-    transition: font-size 0.5s ease-in-out;
-}
-body{
-    --culoare-body: #F4EFE6;
-    --culoare-primara: #2B6777;
-    --culoare-zone-grid: #FFFFFF;     
-    --culoare-contur: #52AB98;
-    --culoare-accent: #E27D60;
-    
-    --margine-pagina: 100px;
-    --gap-celule: 20px;
-    --padding-egal: 15px;
-
-    font-family: 'Lora', serif;
-    background-color: var(--culoare-body);
-    color: var(--culoare-primara);
+@charset "UTF-8";
+/* =========================================
+   VARIABILE GLOBALE ȘI RESETĂRI
+========================================= */
+:root {
+  --culoare-text-principal: #2d5d6c;
+  --culoare-uzura: #d9534f;
+  --culoare-bonus: #5cb85c;
+  --culoare-operator: #888888;
 }
 
-a { color: var(--culoare-accent); text-decoration: none; font-weight: bold; }
-p { border: 1px solid var(--culoare-contur); }
+html {
+  font-size: 18px;
+  transition: font-size 0.5s ease-in-out;
+}
+
+body {
+  --culoare-body: #F4EFE6;
+  --culoare-primara: #2B6777;
+  --culoare-zone-grid: #FFFFFF;
+  --culoare-contur: #52AB98;
+  --culoare-accent: #E27D60;
+  --margine-pagina: 100px;
+  --gap-celule: 20px;
+  --padding-egal: 15px;
+  font-family: "Lora", serif;
+  background-color: var(--culoare-body);
+  color: var(--culoare-primara);
+}
+
+/* =========================================
+   STILURI GENERALE (Tag-uri de bază)
+========================================= */
+a {
+  color: var(--culoare-accent);
+  text-decoration: none;
+  font-weight: bold;
+}
+a:visited {
+  color: var(--culoare-contur);
+}
+a[href^=http]::before {
+  content: "⮳ ";
+  font-size: 1.5em;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+a[href^=http]:hover::before {
+  color: var(--culoare-primara);
+}
+
+p {
+  border: 1px solid var(--culoare-contur);
+}
 
 img, video, iframe, object {
-    width: 100%;
-    max-width: 800px;
-    min-width: 250px;
-    display: block;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  min-width: 250px;
+  display: block;
+  margin: 0 auto;
 }
 
 header, footer {
-    background-color: var(--culoare-primara);
-    border: 2px solid var(--culoare-contur);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    border-radius: 10px;
-    padding: var(--padding-egal);
-    color: white;
+  background-color: var(--culoare-primara);
+  border: 2px solid var(--culoare-contur);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: var(--padding-egal);
+  color: white;
 }
 
-main>section, main>article, main>aside {
-    background-color: var(--culoare-zone-grid);
-    border: 1px solid var(--culoare-contur);
-    box-shadow: 0 0 5px var(--culoare-contur);
-    border-radius: 8px;
-    padding: var(--padding-egal);
-    width: 100%;
-    box-sizing: border-box;
+/* =========================================
+   LAYOUT PRINCIPAL (GRID)
+========================================= */
+main {
+  width: 95%;
+  max-width: 1600px;
+  margin: auto;
+  padding: 10px;
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--gap-celule);
+  /* Setăm 4 coloane egale pentru a ușura împărțirea zonelor 5, 6, 7 */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* HARTA GRIDULUI (Ajustată după schița ta):
+    1 (Prezentare) ocupă tot rândul de sus
+    5 (Useri), 6 (Statistici), 7 (Server) sunt pe un rând, 6 e mai lată
+    3 (Evenimente) e în stânga, 2 (Tabele/Orar) e în dreapta
+    4 (Cartea Saptamanii) e sub 3, iar 2 (Tabele) continuă în dreapta
+    8 (Club Lectură) e la bază, pe tot rândul
+    Restul secțiunilor (categorii, video, etc.) curg natural dedesubt.
+  */
+  grid-template-areas: "z1-prezentare z1-prezentare z1-prezentare z1-prezentare" "z5-useri z6-statistici z6-statistici z7-server" "video-sec video-sec video-sec video-sec" "galerie galerie galerie galerie" "balonase balonase balonase balonase" "z3-calendar z3-calendar z2-tabel z2-tabel" "z4-anunturi z4-anunturi z2-tabel z2-tabel" "z8-club z8-club z8-club z8-club" "categorii categorii categorii categorii" "resurse resurse resurse resurse" "ambianta ambianta playlist playlist" "documente documente documente documente";
+  /* Stiluri comune pentru secțiunile din main */
+}
+main > section, main > article, main > aside {
+  background-color: var(--culoare-zone-grid);
+  border: 1px solid var(--culoare-contur);
+  box-shadow: 0 0 5px var(--culoare-contur);
+  border-radius: 8px;
+  padding: var(--padding-egal);
+  width: 100%;
+  box-sizing: border-box;
 }
 
-#harta-interactiva      { grid-area: z1-prezentare; }
-#zona2-tabele           { grid-area: z2-tabel; } 
-#evenimente             { grid-area: z3-calendar; }
-#cartea-saptamanii      { grid-area: z4-anunturi; }
-#useri-online           { grid-area: z5-useri; }
-#statistici-user        { grid-area: z6-statistici; }
-#date-server            { grid-area: z7-server; }
-#club-lectura           { grid-area: z8-club; }
-#categorii-principale   { grid-area: categorii; }
-#resurse-utile          { grid-area: resurse; }
-#ambianta-lectura       { grid-area: ambianta; }
-#playlist-ambiant       { grid-area: playlist; }
-#documente-oficiale     { grid-area: documente; }
+main a {
+  display: inline-block;
+  padding: 2px 6px;
+  border: 2px solid transparent;
+  background-image: radial-gradient(circle, var(--culoare-accent) 0%, var(--culoare-accent) 40%, transparent 80%, transparent 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0%;
+  transition: background-size 0.4s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+main a:hover {
+  background-size: 100%;
+  color: white;
+}
+main a:active {
+  border: 2px solid var(--culoare-primara);
+}
 
-#harta-interactiva { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 30px; }
-#harta-interactiva .text-prezentare { flex: 1; font-size: 1.2rem; }
-#harta-interactiva .imagine-harta { flex: 1.5; }
+/* Alocarea ID-urilor în Grid */
+#harta-interactiva {
+  grid-area: z1-prezentare;
+}
+
+#prezentare-video {
+  grid-area: video-sec;
+}
+
+#sectiune-galerie-statica {
+  grid-area: galerie;
+} /* Am adăugat galeria aici */
+hr.separator-balonase {
+  grid-area: balonase;
+} /* Am adăugat balonașele aici */
+#zona2-tabele {
+  grid-area: z2-tabel;
+}
+
+#evenimente {
+  grid-area: z3-calendar;
+}
+
+#cartea-saptamanii {
+  grid-area: z4-anunturi;
+}
+
+#useri-online {
+  grid-area: z5-useri;
+}
+
+#statistici-user {
+  grid-area: z6-statistici;
+}
+
+#data-server {
+  grid-area: z7-server;
+}
+
+#club-lectura {
+  grid-area: z8-club;
+}
+
+#categorii-principale {
+  grid-area: categorii;
+}
+
+#resurse-utile {
+  grid-area: resurse;
+}
+
+#ambianta-lectura {
+  grid-area: ambianta;
+}
+
+#playlist-ambiant {
+  grid-area: playlist;
+}
+
+#documente-oficiale {
+  grid-area: documente;
+}
+
+/* =========================================
+   COMPONENTE SPECIFICE (Nesting)
+========================================= */
+#harta-interactiva {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+#harta-interactiva .text-prezentare {
+  flex: 1;
+  font-size: 1.2rem;
+}
+#harta-interactiva .imagine-harta {
+  flex: 1.5;
+}
 
 #zona2-tabele {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    gap: 30px;
-}
-
-main {
-    width: 95%;  
-    max-width: 1600px;
-    margin:auto;
-    padding: 10px;
-    box-sizing: border-box;
-
-    display: grid;
-    gap: var(--gap-celule);
-    grid-template-columns: 1fr 1fr 1fr 1fr; 
-    
-    grid-template-areas:
-        "z1-prezentare z1-prezentare z1-prezentare z1-prezentare" 
-        "video-sec video-sec video-sec video-sec"
-        "z5-useri z6-statistici z6-statistici z7-server"          
-        "z3-calendar z3-calendar z2-tabel z2-tabel"                
-        "z4-anunturi z4-anunturi z2-tabel z2-tabel"                
-        "categorii categorii categorii categorii" 
-        "resurse resurse resurse resurse"
-        "ambianta ambianta playlist playlist"
-        "documente documente documente documente"
-        "z8-club z8-club z8-club z8-club";
-}
-
-
-.pagina-eroare, #istoric-firma {
-    grid-column: 1 / -1 !important; 
-    max-width: 100% !important; 
-    margin: 40px auto !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 30px;
 }
 
 .container-tabel {
-    width: 100%;
-    overflow-x: auto; 
-    margin-top: 15px;
-    padding-bottom: 10px;
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 15px;
+  padding-bottom: 10px;
 }
 
-#tab-orar-simplu { width: 100%; border-collapse: collapse; font-size: 1.1rem; text-align: center; background-color: var(--culoare-zone-grid); }
-#tab-orar-simplu th { background-color: var(--culoare-primara); color: white; padding: 15px; font-weight: bold; border: 1px solid var(--culoare-contur); }
-#tab-orar-simplu td { padding: 12px 15px; border: 1px solid var(--culoare-contur); }
-#tab-orar-simplu tfoot td { background-color: var(--culoare-contur); color: white; font-style: italic; font-size: 0.95rem; }
+#tab-orar-simplu {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  text-align: center;
+  background-color: var(--culoare-zone-grid);
+}
+#tab-orar-simplu th {
+  background-color: var(--culoare-primara);
+  color: white;
+  padding: 15px;
+  font-weight: bold;
+  border: 1px solid var(--culoare-contur);
+}
+#tab-orar-simplu td {
+  padding: 12px 15px;
+  border: 1px solid var(--culoare-contur);
+}
+#tab-orar-simplu tfoot td {
+  background-color: var(--culoare-contur);
+  color: white;
+  font-style: italic;
+  font-size: 0.95rem;
+}
 
 #tab-oferte {
-    width: 100%;
-    border-collapse: collapse; 
-    border: 5px inset var(--culoare-primara); 
-    background-color: var(--culoare-zone-grid);
-    text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+  border: 5px inset var(--culoare-primara);
+  background-color: var(--culoare-zone-grid);
+  text-align: center;
 }
-#tab-oferte caption { caption-side: bottom; padding-top: 10px; font-style: italic; font-size: 0.9rem; color: var(--culoare-primara); text-align: left; }
-#tab-oferte th, #tab-oferte td { border: 1px solid var(--culoare-contur); padding: 12px; }
-#tab-oferte thead th { background-color: var(--culoare-primara); color: white; }
-#tab-oferte tfoot td { background-color: var(--culoare-primara); color: white; font-weight: bold;}
+#tab-oferte caption {
+  caption-side: bottom;
+  padding-top: 10px;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--culoare-primara);
+  text-align: left;
+}
+#tab-oferte th, #tab-oferte td {
+  border: 1px solid var(--culoare-contur);
+  padding: 12px;
+}
+#tab-oferte thead th {
+  background-color: var(--culoare-primara);
+  color: white;
+}
+#tab-oferte tfoot td {
+  background-color: var(--culoare-primara);
+  color: white;
+  font-weight: bold;
+}
+#tab-oferte tbody tr:nth-child(odd) td {
+  border-bottom: 2px solid var(--culoare-accent);
+}
+#tab-oferte tbody tr:nth-child(even) td {
+  border-bottom: 2px solid var(--culoare-contur);
+}
+#tab-oferte tbody tr {
+  outline: 0px solid transparent;
+  transition: outline 0.5s ease;
+}
+#tab-oferte tbody tr:hover {
+  outline: 5px solid rgba(226, 125, 96, 0.7);
+  position: relative;
+  z-index: 10;
+}
 
-#tab-oferte tbody tr:nth-child(odd) td { border-bottom: 2px solid var(--culoare-accent); }
-#tab-oferte tbody tr:nth-child(even) td { border-bottom: 2px solid var(--culoare-contur); }
+#club-lectura {
+  background-color: var(--culoare-primara);
+  color: var(--culoare-zone-grid);
+  text-align: center;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#club-lectura h2 {
+  color: var(--culoare-accent);
+  border-bottom: none;
+  margin-top: 0;
+}
+#club-lectura p {
+  border: none;
+  margin-bottom: 20px;
+}
 
-#tab-oferte tbody tr { outline: 0px solid transparent; transition: outline 0.5s ease; }
-#tab-oferte tbody tr:hover { outline: 5px solid rgba(226, 125, 96, 0.7); position: relative; z-index: 10; }
-
-#club-lectura { background-color: var(--culoare-primara); color: var(--culoare-zone-grid); text-align: center; border: none; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-#club-lectura h2 { color: var(--culoare-accent); border-bottom: none; margin-top: 0; }
-#club-lectura p { border: none; margin-bottom: 20px; }
-
-.formular-abonare { display: flex; gap: 10px; width: 100%; max-width: 400px; }
-.formular-abonare input { flex: 1; padding: 12px 15px; border: 2px solid var(--culoare-contur); border-radius: 25px; font-family: inherit; outline: none; }
-.formular-abonare button { background-color: var(--culoare-accent); color: white; border: none; padding: 12px 25px; border-radius: 25px; font-family: inherit; font-weight: bold; cursor: pointer; transition: background-color 0.3s, transform 0.2s; }
-.formular-abonare button:hover { background-color: #c96b50; transform: scale(1.05); }
-
-:root {
-    --culoare-text-principal: #2d5d6c; 
-    --culoare-uzura: #d9534f;
-    --culoare-bonus: #5cb85c;
-    --culoare-operator: #888888;
+.formular-abonare {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+.formular-abonare input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid var(--culoare-contur);
+  border-radius: 25px;
+  font-family: inherit;
+  outline: none;
+}
+.formular-abonare button {
+  background-color: var(--culoare-accent);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.formular-abonare button:hover {
+  background-color: #c96b50;
+  transform: scale(1.05);
 }
 
 .container-formula-voucher {
-    font-size: 1.5rem; 
-    padding: 1.5rem 0;
-    text-align: center;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-size: 1.5rem;
+  padding: 1.5rem 0;
+  text-align: center;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 math .rezultat-voucher {
-    color: var(--culoare-text-principal);
-    font-size: 1.8rem;
-    font-weight: 700;
-    font-style: normal;
+  color: var(--culoare-text-principal);
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-style: normal;
 }
-
 math .pret-baza mi {
-    color: var(--culoare-text-principal);
-    font-weight: 600;
-    font-style: italic;
+  color: var(--culoare-text-principal);
+  font-weight: 600;
+  font-style: italic;
 }
-
 math .pret-baza mtext {
-    font-size: 0.6em;
-    font-style: normal;
-    font-weight: normal;
+  font-size: 0.6em;
+  font-style: normal;
+  font-weight: normal;
 }
-
 math .numar-impartitor {
-    color: var(--culoare-text-principal);
-    font-size: 1.2rem;
-    font-weight: bold;
+  color: var(--culoare-text-principal);
+  font-size: 1.2rem;
+  font-weight: bold;
 }
-
 math .variabila-uzura {
-    color: var(--culoare-uzura);
-    font-style: italic;
-    font-size: 1.3rem;
+  color: var(--culoare-uzura);
+  font-style: italic;
+  font-size: 1.3rem;
 }
-
 math .variabila-bonus {
-    color: var(--culoare-bonus);
-    font-weight: bold;
-    font-style: normal;
-    font-size: 1.4rem;
+  color: var(--culoare-bonus);
+  font-weight: bold;
+  font-style: normal;
+  font-size: 1.4rem;
 }
-
 math .operator {
-    color: var(--culoare-operator);
-    padding: 0 0.5rem;
-    font-size: 1.3rem;
+  color: var(--culoare-operator);
+  padding: 0 0.5rem;
+  font-size: 1.3rem;
 }
 
-#link-top{
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1000;
-    width: 50px;
-    height: 50px;
-    background-color: var(--culoare-primara);
-    border: 2px solid var(--culoare-contur);
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
-    opacity: 0.6;
-    border-top-left-radius: 50%;
-    border-top-right-radius: 12px;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-    transform: rotate(45deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: all 0.5s ease;
+#link-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  background-color: var(--culoare-primara);
+  border: 2px solid var(--culoare-contur);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+  opacity: 0.6;
+  border-radius: 50% 12px 12px 12px;
+  transform: rotate(45deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.5s ease;
 }
 #link-top .sageata {
-    color: white;
-    font-size: 1.8rem;
-    font-weight: bold;
-    transform: rotate(-45deg);
-    transition: transform 0.5s ease;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  transform: rotate(-45deg);
+  transition: transform 0.5s ease;
 }
 #link-top:hover {
-    opacity: 1; 
-    background-color: var(--culoare-accent); 
+  opacity: 1;
+  background-color: var(--culoare-accent);
 }
-#link-top:hover .sageata{transform:rotate(-45deg) scale(1.4);}
+#link-top:hover .sageata {
+  transform: rotate(-45deg) scale(1.4);
+}
 
 .container-iframe {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.container-iframe iframe {
+  width: 100%;
+  height: 350px;
+  border: 1px solid var(--culoare-contur);
+  border-radius: 0 8px 8px 8px;
+  background-color: var(--culoare-zone-grid);
+  z-index: 1;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .taburi-iframe {
-    display: flex; 
-    flex-direction: row;
-    gap: 5px;
-    margin-bottom: -1px;
-    z-index: 2;
-    position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-bottom: -1px;
+  z-index: 2;
+  position: relative;
 }
 .taburi-iframe a {
-    padding: 10px 20px;
-    background-color: var(--culoare-body);
-    color: var(--culoare-primara);
-    border: 1px solid var(--culoare-contur);
-    border-bottom: 1px solid var(--culoare-zone-grid); 
-    border-radius: 8px 8px 0 0; 
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+  padding: 10px 20px;
+  background-color: var(--culoare-body);
+  color: var(--culoare-primara);
+  border: 1px solid var(--culoare-contur);
+  border-bottom: 1px solid var(--culoare-zone-grid);
+  border-radius: 8px 8px 0 0;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
-.taburi-iframe a:hover,
-.taburi-iframe a:focus {
-    background-color: var(--culoare-primara);
-    color: white;
-    transform: translateY(-2px); 
-}
-.container-iframe iframe {
-    width: 100%;
-    height: 350px;
-    border: 1px solid var(--culoare-contur);
-    border-radius: 0 8px 8px 8px; 
-    background-color: var(--culoare-zone-grid);
-    z-index: 1;
-    position: relative;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+.taburi-iframe a:hover, .taburi-iframe a:focus {
+  background-color: var(--culoare-primara);
+  color: white;
+  transform: translateY(-2px);
 }
 
+/* =========================================
+   BALONAȘE SEPARATOR (HR)
+========================================= */
+hr.separator-balonase {
+  grid-area: balonase;
+  border: none;
+  height: 60px;
+  /* Trick nou pentru Full-bleed: Folosim poziționare absolută bazată pe marginile ecranului, nu pe lățimea containerului. 
+     Acest lucru evită tăierea din cauza barei de scroll. */
+  left: 0;
+  right: 0;
+  width: 100%;
+  /* Spațiu deasupra și dedesubtul liniei (deoarece e absolută, forțăm spațiul) */
+  margin-top: 40px;
+  margin-bottom: 40px;
+  /* Design-ul cu balonașe */
+  background-image: radial-gradient(circle at 30% 30%, var(--culoare-accent) 0%, var(--culoare-accent) 20%, transparent 35%), radial-gradient(circle at 70% 70%, var(--culoare-contur) 0%, var(--culoare-contur) 20%, transparent 35%);
+  background-size: 80px 100%;
+  background-repeat: repeat-x;
+  /* Masca cu estompare foarte mică (10px) pentru a nu arăta tăiat, dar nici prea "ciung" */
+  -webkit-mask-image: linear-gradient(to right, transparent 0px, black 10px, black calc(100% - 10px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0px, black 10px, black calc(100% - 10px), transparent 100%);
+}
+
+/* =========================================
+   MEDIA QUERIES (Responsive)
+========================================= */
 @media screen and (max-width: 1200px) {
-    html { font-size: 16px; } 
-    body { --margine-pagina: 40px; --gap-celule: 15px; }
-
-    main {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-            "z1-prezentare z1-prezentare"
-            "z5-useri z6-statistici"
-            "z3-calendar z2-tabel"
-            "z4-anunturi z2-tabel"
-            "categorii categorii"
-            "resurse z7-server"
-            "ambianta playlist"
-            "documente documente"
-            "z8-club z8-club";
-    }
+  html {
+    font-size: 16px;
+  }
+  body {
+    --margine-pagina: 40px;
+    --gap-celule: 15px;
+  }
+  main {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "z1-prezentare z1-prezentare" "z5-useri z6-statistici" "z3-calendar z2-tabel" "z4-anunturi z2-tabel" "categorii categorii" "resurse z7-server" "ambianta playlist" "documente documente" "z8-club z8-club";
+  }
 }
-
 @media screen and (max-width: 700px) {
-    html { font-size: 15px; } 
-    body { --margine-pagina: 15px; --gap-celule: 10px; }
-    img, video, iframe, object { max-width: 100%; min-width: 150px; }
-    
-    #harta-interactiva { flex-direction: column; }
-    .formular-abonare { flex-direction: column; }
-
-    main {
-        grid-template-columns: 1fr; 
-        grid-template-areas:
-            "z1-prezentare"
-            "z3-calendar"
-            "z4-anunturi"
-            "z2-tabel"
-            "categorii"
-            "z5-useri"
-            "z6-statistici"
-            "z7-server"
-            "resurse"
-            "ambianta"
-            "playlist"
-            "documente"
-            "z8-club";
-    }
+  html {
+    font-size: 15px;
+  }
+  body {
+    --margine-pagina: 15px;
+    --gap-celule: 10px;
+  }
+  img, video, iframe, object {
+    max-width: 100%;
+    min-width: 150px;
+  }
+  #harta-interactiva {
+    flex-direction: column;
+  }
+  .formular-abonare {
+    flex-direction: column;
+  }
+  main {
+    grid-template-columns: 1fr;
+    grid-template-areas: "z1-prezentare" "z3-calendar" "z4-anunturi" "z2-tabel" "categorii" "z5-useri" "z6-statistici" "z7-server" "resurse" "ambianta" "playlist" "documente" "z8-club";
+  }
 }
-
+/* =========================================
+   MEDIA PRINT
+========================================= */
 #watermark-print, #banner-scolar {
-    display: none;
+  display: none;
 }
 
 @media print {
-    #watermark-print, #banner-scolar {
-        display: block;
-    }
-
-    @page :left {
-        margin: 1cm 1cm 1cm 2cm; 
-    }
-    @page :right {
-        margin: 1cm 2cm 1cm 1cm;
-    }
-
-    body {
-        position: relative;
-    }
-    #banner-scolar {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 50%; 
-        border: 4px double black; 
-        text-align: center;
-        padding: 10px;
-        box-sizing: border-box;
-        font-weight: bold;
-        background-color: white;
-        color: black;
-    }
-
-    img, video, iframe, object, map, area, #link-top, .imagine-harta, .container-iframe {
-        display: none !important;
-    }
-
-    main {
-        display: block !important;
-    }
-    main > section, main > article, main > aside {
-        display: block !important;
-        page-break-inside: avoid; 
-        margin-bottom: 20px;
-        border: 1px solid #ccc; 
-    }
-    a {
-        color: black !important;
-        text-decoration: none !important;
-        font-weight: normal !important;
-    }
-    h1 {
-        text-align: center !important;
-        margin-top: 60px; 
-    }
-    header nav {
-        display: block !important;
-        break-after: page;
-    }
-    header nav .menu {
-        display: block !important; 
-        padding-left: 0;
-    }
-    header nav .menu li {
-        display: block !important;
-        border: none !important;
-        height: auto !important;
-        text-align: left !important;
-        padding: 5px 0 !important;
-    }
-    header nav .submenu {
-        display: block !important;
-        position: static !important; 
-        transform: none !important; 
-        padding-left: 40px !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-    .btn-burger { display: none !important; }
-    footer {
-        break-before: page; 
-        border-top: 2px solid black;
-        color: black !important;
-    }
-    #watermark-print {
-        position: fixed;
-        top: 45%; 
-        left: 20%;
-        width: 60%; 
-        height: 10%; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 3rem;
-        font-weight: bold;
-        color: rgba(0, 0, 0, 0.3); 
-        z-index: -100; 
-        pointer-events: none;
-    }
-}a:visited {
-    color: var(--culoare-contur); 
+  #watermark-print, #banner-scolar {
+    display: block;
+  }
+  @page :left {
+    margin: 1cm 1cm 1cm 2cm;
+  }
+  @page :right {
+    margin: 1cm 2cm 1cm 1cm;
+  }
+  body {
+    position: relative;
+  }
+  #banner-scolar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    border: 4px double black;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+  }
+  img, video, iframe, object, map, area, #link-top, .imagine-harta, .container-iframe {
+    display: none !important;
+  }
+  main {
+    display: block !important;
+  }
+  main > section, main > article, main > aside {
+    display: block !important;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+  }
+  a {
+    color: black !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+  }
+  h1 {
+    text-align: center !important;
+    margin-top: 60px;
+  }
+  header nav {
+    display: block !important;
+    -moz-column-break-after: page;
+         break-after: page;
+  }
+  header nav .menu {
+    display: block !important;
+    padding-left: 0;
+  }
+  header nav .menu li {
+    display: block !important;
+    border: none !important;
+    height: auto !important;
+    text-align: left !important;
+    padding: 5px 0 !important;
+  }
+  header nav .submenu {
+    display: block !important;
+    position: static !important;
+    transform: none !important;
+    padding-left: 40px !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .btn-burger {
+    display: none !important;
+  }
+  footer {
+    -moz-column-break-before: page;
+         break-before: page;
+    border-top: 2px solid black;
+    color: black !important;
+  }
+  #watermark-print {
+    position: fixed;
+    top: 45%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.3);
+    z-index: -100;
+    pointer-events: none;
+  }
+}
+/* =========================================
+   1. GALERIE STATICA (Cerinta Galerie)
+========================================= */
+#sectiune-galerie-statica {
+  grid-area: galerie;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background-color: #333;
+  padding: 40px 0;
+  color: var(--culoare-fundal-zone);
+  overflow-x: hidden;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+#sectiune-galerie-statica h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--culoare-fundal-zone);
 }
 
-
-a[href^="http"]::before {
-    content: "⮳ ";
-    font-size: 1.5em; 
-    display: inline-block;
-    transition: color 0.3s ease;
+#grid-galerie-statica {
+  display: grid;
+  gap: 15px;
+  counter-reset: contor-galerie;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spatiere-laterala);
 }
 
-
-a[href^="http"]:hover::before {
-    color: var(--culoare-primara);
+.item-galerie {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 3px solid var(--culoare-fundal-zone);
+  border-radius: 5px;
+}
+.item-galerie picture, .item-galerie img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: transform 0.125s ease-in-out, opacity 0.125s ease-in-out, border-radius 0.125s ease-in-out;
+  transform-origin: top center;
+}
+.item-galerie figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  font-size: 0.85rem;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.item-galerie .atribuire-licenta {
+  font-size: 0.7rem;
+  margin-top: 5px;
+  color: #ccc;
+}
+.item-galerie .atribuire-licenta a {
+  color: var(--culoare-principala);
+}
+.item-galerie:hover img {
+  transform: scale(1.4);
+  opacity: 0.5;
+  border-radius: 15px;
+}
+.item-galerie:hover figcaption {
+  transform: translateY(0);
 }
 
-
-main a {
-    display: inline-block;
-    padding: 2px 6px;
-    border: 2px solid transparent;
-    
-   
-    background-image: radial-gradient(circle, var(--culoare-accent) 0%, var(--culoare-accent) 40%, transparent 80%, transparent 100%);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 0%; 
-    
-    transition: background-size 0.4s ease, color 0.3s ease;
-    border-radius: 5px;
+.index-roman-galerie::before {
+  counter-increment: contor-galerie;
+  content: counter(contor-galerie, lower-roman) ") ";
+  font-weight: bold;
+  color: var(--culoare-principala);
 }
 
-
-main a:hover {
-    background-size: 100%;
-    color: white; 
+@media (min-width: 1025px) {
+  #grid-galerie-statica {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 250px);
+    grid-template-areas: "img1  img2  img3" "img4   .    img5" "img6  img7  img8" "img9   .    img10" "img11 img12 img13";
+  }
+  .item-1 {
+    grid-area: img1;
+  }
+  .item-2 {
+    grid-area: img2;
+  }
+  .item-3 {
+    grid-area: img3;
+  }
+  .item-4 {
+    grid-area: img4;
+  }
+  .item-5 {
+    grid-area: img5;
+  }
+  .item-6 {
+    grid-area: img6;
+  }
+  .item-7 {
+    grid-area: img7;
+  }
+  .item-8 {
+    grid-area: img8;
+  }
+  .item-9 {
+    grid-area: img9;
+  }
+  .item-10 {
+    grid-area: img10;
+  }
+  .item-11 {
+    grid-area: img11;
+  }
+  .item-12 {
+    grid-area: img12;
+  }
+  .item-13 {
+    grid-area: img13;
+  }
+}
+@media (max-width: 1024px) and (min-width: 768px) {
+  #grid-galerie-statica {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 250px;
+    grid-template-areas: none;
+  }
+  .item-galerie {
+    grid-area: auto;
+  }
+}
+@media (max-width: 767px) {
+  #grid-galerie-statica {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 300px;
+    grid-template-areas: none;
+  }
+  .item-galerie {
+    grid-area: auto;
+  }
+}
+/* =========================================
+   2. EFECTE CSS INDIVIDUALE
+========================================= */
+.container-text-plimbaret {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  background-color: #333;
+  color: #eee;
+  padding: 15px 0;
+  margin-bottom: 30px;
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #555;
 }
 
-
-main a:active {
-    border: 2px solid var(--culoare-primara);
+.text-plimbaret {
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: plimbareOrizontala 15s linear infinite;
 }
+
+@keyframes plimbareOrizontala {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.container-duotone {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.container-duotone img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.container-duotone::before, .container-duotone::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: lighten;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+.container-duotone::before {
+  left: 0;
+  background-color: blue;
+  transform: translateX(-100%);
+}
+.container-duotone::after {
+  right: 0;
+  background-color: purple;
+  transform: translateX(100%);
+}
+.container-duotone:hover::before, .container-duotone:hover::after {
+  transform: translateX(0);
+}
+
+.text-reflexie {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+.text-reflexie::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  transform-origin: top;
+  transform: scaleY(-1);
+  filter: blur(2px);
+  opacity: 0.4;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
+  transition: all 0.4s ease;
+}
+.text-reflexie:hover::after {
+  transform: scaleY(-1.6) translateY(-5px);
+  filter: blur(4px);
+  opacity: 0.6;
+}/*# sourceMappingURL=general.css.map */

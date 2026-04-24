@@ -124,7 +124,19 @@ function compileazaScss(caleScss, caleCss){
     
     let numeFisCss = path.basename(caleCss);
     if (fs.existsSync(caleCss)){
-        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, "resurse/css", numeFisCss));
+        try {
+            // Extragem numele fără extensie pentru a-i putea lipi timpul
+            let numeFisFaraExt = numeFisCss.split(".")[0];
+            let timestamp = new Date().getTime(); // Generează un număr unic bazat pe timp
+            
+            
+            let numeBackup = `${numeFisFaraExt}_${timestamp}.css`;
+            
+            fs.copyFileSync(caleCss, path.join(caleBackup, numeBackup));
+        } catch (err) {
+      
+            console.error("Eroare la crearea fișierului de backup:", err.message);
+        }
     }
     
     try {
@@ -135,54 +147,60 @@ function compileazaScss(caleScss, caleCss){
     }
 }
 
-if(fs.existsSync(obGlobal.folderScss)) {
-    let vFisiere = fs.readdirSync(obGlobal.folderScss);
-    for( let numeFis of vFisiere ){
-        if (path.extname(numeFis) == ".scss"){
-            compileazaScss(numeFis);
-        }
-    }
-
-    fs.watch(obGlobal.folderScss, function(eveniment, numeFis){
-        if (eveniment == "change" || eveniment == "rename"){
-            let caleCompleta = path.join(obGlobal.folderScss, numeFis);
-            if (fs.existsSync(caleCompleta)){
-                compileazaScss(caleCompleta);
-            }
-        }
-    });
-}
-
 function initImagini(){
     let caleaCatreGalerie = path.join(__dirname,"resurse/json/galerie.json");
-    if(!fs.existsSync(caleaCatreGalerie)) return; 
+    if(!fs.existsSync(caleaCatreGalerie)) {
+        console.log("Fișierul galerie.json nu există încă. Va fi ignorat momentan.");
+        return; 
+    }
 
     var continut = fs.readFileSync(caleaCatreGalerie).toString("utf-8");
 
     try {
         obGlobal.obImagini = JSON.parse(continut);
     } catch (err) {
-        console.error("Eroare la parsarea 'galerie.json': Fisierul este gol sau are un format JSON invalid.");
+        console.error("Eroare la parsarea 'galerie.json': Fisierul are un format JSON invalid.");
         obGlobal.obImagini = { imagini: [], cale_galerie: "" };
         return;
     }
+    
     let vImagini = obGlobal.obImagini.imagini;
     let caleGalerie = obGlobal.obImagini.cale_galerie;
 
     let caleAbs = path.join(__dirname, caleGalerie);
-    let caleAbsMediu = path.join(caleAbs, "mediu");
-    if (!fs.existsSync(caleAbsMediu))
-        fs.mkdirSync(caleAbsMediu);
+    let caleAbsMedii = path.join(caleAbs, "medii");
+    let caleAbsMici = path.join(caleAbs, "mici");
+    
+    // Creăm folderele pentru imagini redimensionate dacă nu există
+    if (!fs.existsSync(caleAbsMedii)) fs.mkdirSync(caleAbsMedii, {recursive: true});
+    if (!fs.existsSync(caleAbsMici)) fs.mkdirSync(caleAbsMici, {recursive: true});
     
     for (let imag of vImagini){
-        [numeFis, ext] = imag.fisier.split("."); 
-        let caleFisAbs = path.join(caleAbs, imag.fisier);
-        let caleFisMediuAbs = path.join(caleAbsMediu, numeFis + ".webp");
+        // Conform cerinței, cheia se numește "cale_imagine"
+        let numeFisExt = imag.cale_imagine;
+        let [numeFis, ext] = numeFisExt.split("."); 
+        
+        let caleFisAbs = path.join(caleAbs, numeFisExt);
+        let caleFisMediuAbs = path.join(caleAbsMedii, numeFis + ".webp"); // Convertim în webp pentru optimizare
+        let caleFisMicAbs = path.join(caleAbsMici, numeFis + ".webp");
+        
         if(fs.existsSync(caleFisAbs)) {
-            sharp(caleFisAbs).resize(300).toFile(caleFisMediuAbs);
+            // Dacă nu există varianta medie, o generăm cu sharp (latime 400px cf. cerinței)
+            if(!fs.existsSync(caleFisMediuAbs)){
+                sharp(caleFisAbs).resize(400).toFile(caleFisMediuAbs);
+            }
+            // Dacă nu există varianta mică, o generăm cu sharp (latime 200px)
+            if(!fs.existsSync(caleFisMicAbs)){
+                sharp(caleFisAbs).resize(200).toFile(caleFisMicAbs);
+            }
+        } else {
+            console.error(`Eroare: Imaginea ${numeFisExt} nu a fost găsită fizic în ${caleAbs}!`);
         }
-        imag.fisier_mediu = path.join("/", caleGalerie, "mediu", numeFis + ".webp" );
-        imag.fisier = path.join("/", caleGalerie, imag.fisier );
+        
+        // Salvăm căile gata pregătite în obiect ca să ne fie super ușor în EJS
+        imag.fisier_mare = "/" + caleGalerie + "/" + numeFisExt;
+        imag.fisier_mediu = "/" + caleGalerie + "/medii/" + numeFis + ".webp";
+        imag.fisier_mic = "/" + caleGalerie + "/mici/" + numeFis + ".webp";
     }
 }
 initImagini();
@@ -212,7 +230,7 @@ for(let folder of vector_foldere){
     if(!fs.existsSync(caleFolder)){
         fs.mkdirSync(caleFolder);
     }
-}
+}``
 
 app.use("/resurse", express.static(path.join(__dirname, "resurse")));
 
@@ -221,9 +239,42 @@ app.get("/favicon.ico", function(req, res){
 });
 
 app.get(["/", "/index", "/home"], function(req,res){
+    let imaginiDeTrimis = [];
+
+    // Verificăm dacă avem imagini încărcate din galerie.json
+    if (obGlobal.obImagini && obGlobal.obImagini.imagini) {
+        
+        // 1. Aflăm minutul curent
+        let minutCurent = new Date().getMinutes();
+        
+        // 2. Calculăm în ce sfert de oră suntem (1, 2, 3 sau 4)
+        let sfertCurent;
+        if (minutCurent >= 0 && minutCurent < 15) {
+            sfertCurent = 1;
+        } else if (minutCurent >= 15 && minutCurent < 30) {
+            sfertCurent = 2;
+        } else if (minutCurent >= 30 && minutCurent < 45) {
+            sfertCurent = 3;
+        } else {
+            sfertCurent = 4;
+        }
+        
+        // 3. Filtrăm imaginile: le păstrăm doar pe cele care au sfert_ora potrivit
+        imaginiDeTrimis = obGlobal.obImagini.imagini.filter(function(imag) {
+            // Folosim == ca să funcționeze chiar dacă în JSON sfertul e scris ca string ("1") sau număr (1)
+            return imag.sfert_ora == sfertCurent; 
+        });
+        
+        // 4. Cerința zice: "numărul de imagini afișate se va trunchia la 10"
+        if (imaginiDeTrimis.length > 10) {
+            imaginiDeTrimis = imaginiDeTrimis.slice(0, 10);
+        }
+    }
+
+    // Trimitem către EJS doar imaginile filtrate
     res.render("pagini/index", {
         ip: req.ip,
-        imagine: obGlobal.obImagini ? obGlobal.obImagini.imagini : []
+        imagine: imaginiDeTrimis
     });
 });
 
@@ -265,3 +316,5 @@ app.get("/*", function(req,res){
 app.listen(8080, () => {
     console.log("Serverul a pornit pe portul 8080!");
 });
+
+app.get("/produse")

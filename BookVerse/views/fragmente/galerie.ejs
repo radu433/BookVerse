@@ -1,0 +1,31 @@
+<div id="grid-galerie-statica">
+    <% if (locals.imagine && imagine.length > 0) { %>
+        <% for (let i=0; i < imagine.length; i++) { 
+            let img = imagine[i];
+        %>
+            <figure class="item-galerie">
+                <picture>
+                    <source srcset="<%= img.fisier_mic %>" media="(max-width: 500px)">
+                    <source srcset="<%= img.fisier_mediu %>" media="(max-width: 1000px)">
+                    <img src="<%= img.fisier_mare %>" 
+                         alt="<%= img.alt ? img.alt : img.titlu %>" 
+                         title="<%= img.titlu %>" />
+                </picture>
+                
+                <figcaption>
+                    <span class="index-roman-galerie"></span>
+                    <strong><%= img.titlu %></strong><br/>
+                    <%= img.descriere %>
+                    
+                    <% if (img.licenta) { %>
+                        <div class="atribuire-licenta">
+                            Sursă: <a href="<%= img.link_licenta %>" target="_blank"><%= img.licenta %></a>
+                        </div>
+                    <% } %>
+                </figcaption>
+            </figure>
+        <% } %>
+    <% } else { %>
+        <p style="color: white; text-align: center;">Momentan nu sunt imagini disponibile pentru acest sfert de oră.</p>
+    <% } %>
+</div>
