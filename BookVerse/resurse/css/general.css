@@ -1,7 +1,247 @@
 @charset "UTF-8";
 /* =========================================
-   VARIABILE GLOBALE ȘI RESETĂRI
+   GALERIE STATICA (Cerinta layout grid 5x3)
 ========================================= */
+#sectiune-galerie-statica {
+  grid-area: galerie;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background-color: transparent; /* Rezolvă problema fundalului negru uriaș */
+  padding: 40px 0;
+  overflow-x: hidden;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border: none;
+  box-shadow: none;
+}
+#sectiune-galerie-statica h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--culoare-primara);
+}
+
+#grid-galerie-statica {
+  display: grid;
+  gap: 15px;
+  counter-reset: contor-galerie;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.item-galerie {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent; /* Elimină pătratele albe din spate */
+  border: 3px solid var(--culoare-contur);
+  border-radius: 5px;
+}
+.item-galerie picture, .item-galerie img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: transform 0.125s ease-in-out, opacity 0.125s ease-in-out, border-radius 0.125s ease-in-out;
+  transform-origin: top center;
+}
+.item-galerie figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(43, 103, 119, 0.88); /* Culoarea primara (teal), usor transparenta */
+  color: white;
+  padding: 10px;
+  font-size: 0.85rem;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.item-galerie:hover img {
+  transform: scale(1.4);
+  opacity: 0.5;
+  border-radius: 15px;
+}
+.item-galerie:hover figcaption {
+  transform: translateY(0);
+}
+
+.index-roman-galerie::before {
+  counter-increment: contor-galerie;
+  content: counter(contor-galerie, lower-roman) ") ";
+  font-weight: bold;
+  color: var(--culoare-accent);
+}
+
+/* --- Layout Grid Responsive (13 poze) --- */
+@media (min-width: 1025px) {
+  #grid-galerie-statica {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 250px);
+    grid-template-areas: "img1  img2  img3" "img4   .    img5" "img6  img7  img8" "img9   .    img10" "img11 img12 img13";
+  }
+  .item-1 {
+    grid-area: img1;
+  }
+  .item-2 {
+    grid-area: img2;
+  }
+  .item-3 {
+    grid-area: img3;
+  }
+  .item-4 {
+    grid-area: img4;
+  }
+  .item-5 {
+    grid-area: img5;
+  }
+  .item-6 {
+    grid-area: img6;
+  }
+  .item-7 {
+    grid-area: img7;
+  }
+  .item-8 {
+    grid-area: img8;
+  }
+  .item-9 {
+    grid-area: img9;
+  }
+  .item-10 {
+    grid-area: img10;
+  }
+  .item-11 {
+    grid-area: img11;
+  }
+  .item-12 {
+    grid-area: img12;
+  }
+  .item-13 {
+    grid-area: img13;
+  }
+}
+@media (max-width: 1024px) and (min-width: 768px) {
+  #grid-galerie-statica {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 250px;
+    grid-template-areas: none;
+  }
+  .item-galerie {
+    grid-area: auto;
+  }
+}
+@media (max-width: 767px) {
+  #grid-galerie-statica {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 300px;
+    grid-template-areas: none;
+  }
+  .item-galerie {
+    grid-area: auto;
+  }
+}
+/* =========================================
+   EFECTE CSS SPECIALE
+========================================= */
+/* Text Plimbaret */
+.container-text-plimbaret {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  background-color: var(--culoare-primara);
+  color: white;
+  padding: 15px 0;
+  margin-bottom: 30px;
+  border-top: 1px solid var(--culoare-contur);
+  border-bottom: 1px solid var(--culoare-contur);
+}
+
+.text-plimbaret {
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: plimbareOrizontala 15s linear infinite;
+}
+
+@keyframes plimbareOrizontala {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+/* Duotone */
+.container-duotone {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.container-duotone img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.container-duotone::before, .container-duotone::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: lighten;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+.container-duotone::before {
+  left: 0;
+  background-color: var(--culoare-primara);
+  transform: translateX(-100%);
+}
+.container-duotone::after {
+  right: 0;
+  background-color: var(--culoare-accent);
+  transform: translateX(100%);
+}
+.container-duotone:hover::before, .container-duotone:hover::after {
+  transform: translateX(0);
+}
+
+/* Reflexie Text (Deja aplicată pe h2-ul tău cu id-ul harta-interactiva) */
+.text-reflexie {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+  line-height: 1;
+}
+.text-reflexie::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  transform-origin: top;
+  transform: scaleY(-1);
+  filter: blur(2px);
+  opacity: 0.4;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+  transition: all 0.4s ease;
+}
+.text-reflexie:hover::after {
+  transform: scaleY(-1.6) translateY(-5px);
+  filter: blur(4px);
+  opacity: 0.6;
+}
+
+/* =========================================
+   VARIABILE GLOBALE ȘI RESETĂRI
+   ========================================= */
 :root {
   --culoare-text-principal: #2d5d6c;
   --culoare-uzura: #d9534f;
@@ -30,7 +270,7 @@ body {
 
 /* =========================================
    STILURI GENERALE (Tag-uri de bază)
-========================================= */
+   ========================================= */
 a {
   color: var(--culoare-accent);
   text-decoration: none;
@@ -72,7 +312,7 @@ header, footer {
 
 /* =========================================
    LAYOUT PRINCIPAL (GRID)
-========================================= */
+   ========================================= */
 main {
   width: 95%;
   max-width: 1600px;
@@ -81,18 +321,8 @@ main {
   box-sizing: border-box;
   display: grid;
   gap: var(--gap-celule);
-  /* Setăm 4 coloane egale pentru a ușura împărțirea zonelor 5, 6, 7 */
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  /* HARTA GRIDULUI (Ajustată după schița ta):
-    1 (Prezentare) ocupă tot rândul de sus
-    5 (Useri), 6 (Statistici), 7 (Server) sunt pe un rând, 6 e mai lată
-    3 (Evenimente) e în stânga, 2 (Tabele/Orar) e în dreapta
-    4 (Cartea Saptamanii) e sub 3, iar 2 (Tabele) continuă în dreapta
-    8 (Club Lectură) e la bază, pe tot rândul
-    Restul secțiunilor (categorii, video, etc.) curg natural dedesubt.
-  */
-  grid-template-areas: "z1-prezentare z1-prezentare z1-prezentare z1-prezentare" "z5-useri z6-statistici z6-statistici z7-server" "video-sec video-sec video-sec video-sec" "galerie galerie galerie galerie" "balonase balonase balonase balonase" "z3-calendar z3-calendar z2-tabel z2-tabel" "z4-anunturi z4-anunturi z2-tabel z2-tabel" "z8-club z8-club z8-club z8-club" "categorii categorii categorii categorii" "resurse resurse resurse resurse" "ambianta ambianta playlist playlist" "documente documente documente documente";
-  /* Stiluri comune pentru secțiunile din main */
+  grid-template-areas: "z1-prezentare z1-prezentare z1-prezentare z1-prezentare" "video-sec video-sec video-sec video-sec" "z5-useri z6-statistici z6-statistici z7-server" "galerie galerie galerie galerie" "balonase balonase balonase balonase" "z3-calendar z3-calendar z2-tabel z2-tabel" "z4-anunturi z4-anunturi z2-tabel z2-tabel" "categorii categorii categorii categorii" "resurse resurse resurse resurse" "ambianta ambianta playlist playlist" "z8-club z8-club z8-club z8-club" "bootstrap bootstrap bootstrap bootstrap" "documente documente documente documente";
 }
 main > section, main > article, main > aside {
   background-color: var(--culoare-zone-grid);
@@ -103,7 +333,6 @@ main > section, main > article, main > aside {
   width: 100%;
   box-sizing: border-box;
 }
-
 main a {
   display: inline-block;
   padding: 2px 6px;
@@ -128,28 +357,6 @@ main a:active {
   grid-area: z1-prezentare;
 }
 
-#prezentare-video {
-  grid-area: video-sec;
-}
-
-#sectiune-galerie-statica {
-  grid-area: galerie;
-} /* Am adăugat galeria aici */
-hr.separator-balonase {
-  grid-area: balonase;
-} /* Am adăugat balonașele aici */
-#zona2-tabele {
-  grid-area: z2-tabel;
-}
-
-#evenimente {
-  grid-area: z3-calendar;
-}
-
-#cartea-saptamanii {
-  grid-area: z4-anunturi;
-}
-
 #useri-online {
   grid-area: z5-useri;
 }
@@ -162,8 +369,28 @@ hr.separator-balonase {
   grid-area: z7-server;
 }
 
-#club-lectura {
-  grid-area: z8-club;
+#prezentare-video {
+  grid-area: video-sec;
+}
+
+#sectiune-galerie-statica {
+  grid-area: galerie;
+}
+
+hr.separator-balonase {
+  grid-area: balonase;
+}
+
+#evenimente {
+  grid-area: z3-calendar;
+}
+
+#zona2-tabele {
+  grid-area: z2-tabel;
+}
+
+#cartea-saptamanii {
+  grid-area: z4-anunturi;
 }
 
 #categorii-principale {
@@ -182,13 +409,21 @@ hr.separator-balonase {
   grid-area: playlist;
 }
 
+#club-lectura {
+  grid-area: z8-club;
+}
+
 #documente-oficiale {
   grid-area: documente;
 }
 
+#demo-bootstrap {
+  grid-area: bootstrap;
+}
+
 /* =========================================
    COMPONENTE SPECIFICE (Nesting)
-========================================= */
+   ========================================= */
 #harta-interactiva {
   display: flex;
   flex-direction: row;
@@ -462,31 +697,26 @@ math .operator {
 
 /* =========================================
    BALONAȘE SEPARATOR (HR)
-========================================= */
+   ========================================= */
 hr.separator-balonase {
   grid-area: balonase;
   border: none;
   height: 60px;
-  /* Trick nou pentru Full-bleed: Folosim poziționare absolută bazată pe marginile ecranului, nu pe lățimea containerului. 
-     Acest lucru evită tăierea din cauza barei de scroll. */
   left: 0;
   right: 0;
   width: 100%;
-  /* Spațiu deasupra și dedesubtul liniei (deoarece e absolută, forțăm spațiul) */
   margin-top: 40px;
   margin-bottom: 40px;
-  /* Design-ul cu balonașe */
   background-image: radial-gradient(circle at 30% 30%, var(--culoare-accent) 0%, var(--culoare-accent) 20%, transparent 35%), radial-gradient(circle at 70% 70%, var(--culoare-contur) 0%, var(--culoare-contur) 20%, transparent 35%);
   background-size: 80px 100%;
   background-repeat: repeat-x;
-  /* Masca cu estompare foarte mică (10px) pentru a nu arăta tăiat, dar nici prea "ciung" */
   -webkit-mask-image: linear-gradient(to right, transparent 0px, black 10px, black calc(100% - 10px), transparent 100%);
   mask-image: linear-gradient(to right, transparent 0px, black 10px, black calc(100% - 10px), transparent 100%);
 }
 
 /* =========================================
-   MEDIA QUERIES (Responsive)
-========================================= */
+   MEDIA QUERIES (Responsive general)
+   ========================================= */
 @media screen and (max-width: 1200px) {
   html {
     font-size: 16px;
@@ -499,8 +729,8 @@ hr.separator-balonase {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "z1-prezentare z1-prezentare" "z5-useri z6-statistici" "z3-calendar z2-tabel" "z4-anunturi z2-tabel" "categorii categorii" "resurse z7-server" "ambianta playlist" "documente documente" "z8-club z8-club";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "z1-prezentare z1-prezentare z1-prezentare z1-prezentare" "video-sec video-sec video-sec video-sec" "z5-useri z6-statistici z6-statistici z7-server" "galerie galerie galerie galerie" "balonase balonase balonase balonase" "z3-calendar z3-calendar z2-tabel z2-tabel" "z4-anunturi z4-anunturi z2-tabel z2-tabel" "categorii categorii categorii categorii" "resurse resurse resurse resurse" "ambianta ambianta playlist playlist" "z8-club z8-club z8-club z8-club" "bootstrap bootstrap bootstrap bootstrap" "documente documente documente documente";
   }
 }
 @media screen and (max-width: 700px) {
@@ -523,12 +753,12 @@ hr.separator-balonase {
   }
   main {
     grid-template-columns: 1fr;
-    grid-template-areas: "z1-prezentare" "z3-calendar" "z4-anunturi" "z2-tabel" "categorii" "z5-useri" "z6-statistici" "z7-server" "resurse" "ambianta" "playlist" "documente" "z8-club";
+    grid-template-areas: "z1-prezentare" "video-sec" "z3-calendar" "z4-anunturi" "z2-tabel" "categorii" "z5-useri" "z6-statistici" "z7-server" "galerie" "resurse" "ambianta" "playlist" "z8-club" "bootstrap" "documente";
   }
 }
 /* =========================================
    MEDIA PRINT
-========================================= */
+   ========================================= */
 #watermark-print, #banner-scolar {
   display: none;
 }
@@ -631,243 +861,10 @@ hr.separator-balonase {
   }
 }
 /* =========================================
-   1. GALERIE STATICA (Cerinta Galerie)
-========================================= */
-#sectiune-galerie-statica {
-  grid-area: galerie;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  background-color: #333;
-  padding: 40px 0;
-  color: var(--culoare-fundal-zone);
-  overflow-x: hidden;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-#sectiune-galerie-statica h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: var(--culoare-fundal-zone);
-}
-
-#grid-galerie-statica {
-  display: grid;
-  gap: 15px;
-  counter-reset: contor-galerie;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--spatiere-laterala);
-}
-
-.item-galerie {
-  margin: 0;
-  position: relative;
-  overflow: hidden;
-  background-color: #ffffff;
-  border: 3px solid var(--culoare-fundal-zone);
-  border-radius: 5px;
-}
-.item-galerie picture, .item-galerie img {
-  display: block;
+   DEMO BOOTSTRAP IN GRID
+   ========================================= */
+#demo-bootstrap {
+  grid-column: 1/-1;
   width: 100%;
-  height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
-  transition: transform 0.125s ease-in-out, opacity 0.125s ease-in-out, border-radius 0.125s ease-in-out;
-  transform-origin: top center;
-}
-.item-galerie figcaption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 10px;
-  font-size: 0.85rem;
-  text-align: center;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
-}
-.item-galerie .atribuire-licenta {
-  font-size: 0.7rem;
-  margin-top: 5px;
-  color: #ccc;
-}
-.item-galerie .atribuire-licenta a {
-  color: var(--culoare-principala);
-}
-.item-galerie:hover img {
-  transform: scale(1.4);
-  opacity: 0.5;
-  border-radius: 15px;
-}
-.item-galerie:hover figcaption {
-  transform: translateY(0);
-}
-
-.index-roman-galerie::before {
-  counter-increment: contor-galerie;
-  content: counter(contor-galerie, lower-roman) ") ";
-  font-weight: bold;
-  color: var(--culoare-principala);
-}
-
-@media (min-width: 1025px) {
-  #grid-galerie-statica {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, 250px);
-    grid-template-areas: "img1  img2  img3" "img4   .    img5" "img6  img7  img8" "img9   .    img10" "img11 img12 img13";
-  }
-  .item-1 {
-    grid-area: img1;
-  }
-  .item-2 {
-    grid-area: img2;
-  }
-  .item-3 {
-    grid-area: img3;
-  }
-  .item-4 {
-    grid-area: img4;
-  }
-  .item-5 {
-    grid-area: img5;
-  }
-  .item-6 {
-    grid-area: img6;
-  }
-  .item-7 {
-    grid-area: img7;
-  }
-  .item-8 {
-    grid-area: img8;
-  }
-  .item-9 {
-    grid-area: img9;
-  }
-  .item-10 {
-    grid-area: img10;
-  }
-  .item-11 {
-    grid-area: img11;
-  }
-  .item-12 {
-    grid-area: img12;
-  }
-  .item-13 {
-    grid-area: img13;
-  }
-}
-@media (max-width: 1024px) and (min-width: 768px) {
-  #grid-galerie-statica {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 250px;
-    grid-template-areas: none;
-  }
-  .item-galerie {
-    grid-area: auto;
-  }
-}
-@media (max-width: 767px) {
-  #grid-galerie-statica {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 300px;
-    grid-template-areas: none;
-  }
-  .item-galerie {
-    grid-area: auto;
-  }
-}
-/* =========================================
-   2. EFECTE CSS INDIVIDUALE
-========================================= */
-.container-text-plimbaret {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  overflow: hidden;
-  background-color: #333;
-  color: #eee;
-  padding: 15px 0;
-  margin-bottom: 30px;
-  border-top: 1px solid #555;
-  border-bottom: 1px solid #555;
-}
-
-.text-plimbaret {
-  display: inline-block;
-  white-space: nowrap;
-  font-weight: bold;
-  font-size: 1.2rem;
-  animation: plimbareOrizontala 15s linear infinite;
-}
-
-@keyframes plimbareOrizontala {
-  0% {
-    transform: translateX(100vw);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-.container-duotone {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-.container-duotone img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.container-duotone::before, .container-duotone::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: lighten;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 2;
-  pointer-events: none;
-}
-.container-duotone::before {
-  left: 0;
-  background-color: blue;
-  transform: translateX(-100%);
-}
-.container-duotone::after {
-  right: 0;
-  background-color: purple;
-  transform: translateX(100%);
-}
-.container-duotone:hover::before, .container-duotone:hover::after {
-  transform: translateX(0);
-}
-
-.text-reflexie {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 5px;
-}
-.text-reflexie::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 100%;
-  width: 100%;
-  transform-origin: top;
-  transform: scaleY(-1);
-  filter: blur(2px);
-  opacity: 0.4;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
-  mask-image: linear-gradient(to bottom, transparent 20%, black 100%);
-  transition: all 0.4s ease;
-}
-.text-reflexie:hover::after {
-  transform: scaleY(-1.6) translateY(-5px);
-  filter: blur(4px);
-  opacity: 0.6;
+  margin-top: 30px;
 }/*# sourceMappingURL=general.css.map */

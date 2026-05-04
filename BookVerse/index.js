@@ -105,44 +105,52 @@ function initErori(){
 }
 initErori();
 
-function compileazaScss(caleScss, caleCss){
-    if(!caleCss){
-        let numeFisExt = path.basename(caleScss); 
-        let numeFis = numeFisExt.split(".")[0]; 
-        caleCss = numeFis + ".css"; 
+function compileazaScss(caleScss, caleCss) {
+    // BONUS 4: Gestionare nume fișiere cu puncte (ex: stil.frumos.scss)
+    if (!caleCss) {
+        let numeFisExt = path.basename(caleScss);
+        // Folosim lastIndexOf pentru a tăia doar ultima extensie, 
+        // păstrând punctele din interiorul numelui
+        let pozitieUltimulPunct = numeFisExt.lastIndexOf(".");
+        let numeFis = (pozitieUltimulPunct !== -1) ? numeFisExt.substring(0, pozitieUltimulPunct) : numeFisExt;
+        caleCss = numeFis + ".css";
     }
-    
+
+    // Stabilire căi absolute
     if (!path.isAbsolute(caleScss))
         caleScss = path.join(obGlobal.folderScss, caleScss);
     if (!path.isAbsolute(caleCss))
         caleCss = path.join(obGlobal.folderCss, caleCss);
-    
+
+    // Pregătire folder backup
     let caleBackup = path.join(obGlobal.folderBackup, "resurse/css");
     if (!fs.existsSync(caleBackup)) {
-        fs.mkdirSync(caleBackup, {recursive:true});
+        fs.mkdirSync(caleBackup, { recursive: true });
     }
-    
+
     let numeFisCss = path.basename(caleCss);
-    if (fs.existsSync(caleCss)){
+    if (fs.existsSync(caleCss)) {
         try {
-            // Extragem numele fără extensie pentru a-i putea lipi timpul
-            let numeFisFaraExt = numeFisCss.split(".")[0];
-            let timestamp = new Date().getTime(); // Generează un număr unic bazat pe timp
-            
-            
+            // BONUS 4: Extragem numele corect chiar dacă are puncte
+            let ultimulPunctCss = numeFisCss.lastIndexOf(".");
+            let numeFisFaraExt = (ultimulPunctCss !== -1) ? numeFisCss.substring(0, ultimulPunctCss) : numeFisCss;
+
+            // BONUS 3: Adăugare timestamp în numele fișierului de backup
+            let timestamp = Date.now(); // Mai scurt decât new Date().getTime()
             let numeBackup = `${numeFisFaraExt}_${timestamp}.css`;
-            
+
             fs.copyFileSync(caleCss, path.join(caleBackup, numeBackup));
         } catch (err) {
-      
             console.error("Eroare la crearea fișierului de backup:", err.message);
         }
     }
-    
+
+    // Compilare efectivă
     try {
-        let rez = sass.compile(caleScss, {"sourceMap":true});
+        let rez = sass.compile(caleScss, { "sourceMap": true });
         fs.writeFileSync(caleCss, rez.css);
-    } catch(e) {
+        // console.log(`Compilat cu succes: ${path.basename(caleCss)}`);
+    } catch (e) {
         console.error("Eroare la compilare SASS:", e.message);
     }
 }
@@ -312,6 +320,42 @@ app.get("/*", function(req,res){
         return;
     }
 });
+
+function verificaImaginiGalerie(caleJsonImagini) {
+    console.log("--- Verificare integritate galerie ---");
+    
+    // 1. Citim fișierul JSON
+    let dateGalerie;
+    try {
+        let continutJson = fs.readFileSync(caleJsonImagini, "utf8");
+        dateGalerie = JSON.parse(continutJson);
+    } catch (err) {
+        console.error(`[EROARE CRITICĂ] Nu s-a putut citi JSON-ul de galerie: ${err.message}`);
+        return;
+    }
+
+    // 2. Bonus 5a: Verificăm dacă folderul specificat în "cale_galerie" există
+    // Presupunem că folderul este relativ la rădăcina proiectului
+    let folderGalerie = path.join(__dirname, dateGalerie.cale_galerie);
+    if (!fs.existsSync(folderGalerie)) {
+        console.error(`[EROARE CONFIGURARE] Folderul specificat în JSON ("${dateGalerie.cale_galerie}") NU există în sistem la calea: ${folderGalerie}`);
+    } else {
+        console.log(`[OK] Folderul galeriei a fost găsit.`);
+    }
+
+    // 3. Bonus 5b: Verificăm fiecare imagine din listă
+    dateGalerie.imagini.forEach((img, index) => {
+        // Construim calea către imaginea curentă (ex: resurse/imagini/galerie/nume.jpg)
+        let caleImagine = path.join(__dirname, dateGalerie.cale_galerie, img.fisier);
+        
+        if (!fs.existsSync(caleImagine)) {
+            console.error(`[EROARE IMAGINE] Imaginea de la indexul ${index} cu numele "${img.fisier}" lipsește din folderul "${dateGalerie.cale_galerie}"!`);
+            console.error(`        Calea căutată a fost: ${caleImagine}`);
+        }
+    });
+
+    console.log("--- Finalizare verificare galerie ---\n");
+}
 
 app.listen(8080, () => {
     console.log("Serverul a pornit pe portul 8080!");
