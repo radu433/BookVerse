@@ -3,9 +3,23 @@ const fs = require("fs");
 const path = require("path");
 const sass = require("sass");
 const sharp = require("sharp");
+const { Client } = require('pg');
+require('dotenv').config();
 
 const app = express();
 app.set("view engine", "ejs");
+
+const dbClient = new Client({
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+});
+
+dbClient.connect()
+    .then(() => console.log('Connected to PostgreSQL successfully.'))
+    .catch(err => console.error('Error connecting to PostgreSQL:', err.stack));
 
 obGlobal = {                                                  
     obErori: null,
@@ -286,6 +300,71 @@ app.get(["/", "/index", "/home"], function(req,res){
     });
 });
 
+// --- GLOBAL VARIABLES & MIDDLEWARES ---
+app.use(async (req, res, next) => {
+    try {
+        const categoriesResult = await dbClient.query('SELECT unnest(enum_range(NULL::categorie_carte)) AS categorie');
+        res.locals.categorii = categoriesResult.rows.map(row => row.categorie);
+    } catch(err) {
+        console.error("Nu am putut prelua categoriile", err);
+        res.locals.categorii = [];
+    }
+    next();
+});
+
+// --- RUTE PRODUSE ---
+
+app.get("/produse", async function(req, res) {
+    try {
+        let query = 'SELECT * FROM carti';
+        let params = [];
+        
+        // Filtrare la nivel de server pe baza query parameter-ului
+        if (req.query.categorie) {
+            query += ' WHERE categorie_mare = $1';
+            params.push(req.query.categorie);
+        }
+
+        const result = await dbClient.query(query, params);
+        const produse = result.rows;
+
+        let minPret = 0;
+        let maxPret = 300;
+        try {
+            const rangeResult = await dbClient.query('SELECT MIN(pret) AS min_pret, MAX(pret) AS max_pret FROM carti');
+            if(rangeResult.rows.length > 0) {
+                minPret = Math.floor(rangeResult.rows[0].min_pret || 0);
+                maxPret = Math.ceil(rangeResult.rows[0].max_pret || 300);
+            }
+        } catch (e) {
+            console.error("Nu am putut prelua min/max pret", e);
+        }
+
+        res.render("pagini/produse", {
+            produse: produse,
+            minPret: minPret,
+            maxPret: maxPret
+        });
+    } catch (err) {
+        console.error("Eroare la extragerea produselor:", err);
+        afisareaEroare(res, 500, "Eroare baza de date", "Nu am putut prelua produsele.");
+    }
+});
+
+app.get("/produs/:id", async function(req, res) {
+    try {
+        const result = await dbClient.query('SELECT * FROM carti WHERE id = $1', [req.params.id]);
+        if (result.rows.length === 0) {
+            afisareaEroare(res, 404, "Produs inexistent", "Produsul cerut nu a fost găsit.");
+            return;
+        }
+        res.render("pagini/produs", { produs: result.rows[0] });
+    } catch (err) {
+        console.error("Eroare la extragerea produsului:", err);
+        afisareaEroare(res, 500, "Eroare baza de date", "Nu am putut prelua produsul.");
+    }
+});
+
 // AICI ESTE REPARAȚIA CRITICĂ: Am lăsat doar "/*"
 app.get("/*", function(req,res){
     console.log("Cale pagina ceruta:", req.url);
@@ -359,6 +438,4 @@ function verificaImaginiGalerie(caleJsonImagini) {
 
 app.listen(8080, () => {
     console.log("Serverul a pornit pe portul 8080!");
-});
-
-app.get("/produse")
+});

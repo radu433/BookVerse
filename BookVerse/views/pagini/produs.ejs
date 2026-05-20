@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>BookVerse - <%= produs.nume %></title>
+    <%- include('../fragmente/head.ejs') %>
+    <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css">
+</head>
+<body>
+    <%- include('../fragmente/header.ejs') %>
+
+    <main class="produs-unic">
+        <section class="produs-detalii-complet">
+            <h2><%= produs.nume %></h2>
+            <div class="produs-layout">
+                <div class="imagine-mare">
+                    <img src="<%= produs.imagine %>" alt="<%= produs.nume %>">
+                </div>
+                <div class="informatii-text">
+                    <p class="desc-mare"><strong>Descriere:</strong> <%= produs.descriere %></p>
+                    <div class="atribute-grid">
+                        <div class="atribut">
+                            <span class="label">Categorie:</span>
+                            <span class="valoare"><%= produs.categorie_mare %></span>
+                        </div>
+                        <div class="atribut">
+                            <span class="label">Tip copertă:</span>
+                            <span class="valoare"><%= produs.tip_coperta %></span>
+                        </div>
+                        <div class="atribut">
+                            <span class="label">Preț:</span>
+                            <span class="valoare important"><%= produs.pret %> RON</span>
+                        </div>
+                        <div class="atribut">
+                            <span class="label">Pagini:</span>
+                            <span class="valoare"><%= produs.numar_pagini %></span>
+                        </div>
+                        <div class="atribut">
+                            <span class="label">Culoare dominantă:</span>
+                            <span class="valoare" style="text-transform: capitalize;"><%= produs.culoare_coperta %></span>
+                        </div>
+                        <div class="atribut">
+                            <span class="label">Limbi:</span>
+                            <span class="valoare"><%= produs.limbi_disponibile %></span>
+                        </div>
+                        <div class="atribut">
+                            <span class="label">Semn de carte inclus:</span>
+                            <span class="valoare"><%= produs.include_semn_carte ? "Da" : "Nu" %></span>
+                        </div>
+                        <div class="atribut">
+                            <span class="label">Adăugat în catalog:</span>
+                            <span class="valoare">
+                                <% 
+                                let zi = produs.data_adaugare.getDate().toString().padStart(2, '0');
+                                let luni = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
+                                let luna = luni[produs.data_adaugare.getMonth()];
+                                let an = produs.data_adaugare.getFullYear();
+                                %>
+                                <%= zi %> <%= luna %> <%= an %>
+                            </span>
+                        </div>
+                    </div>
+                    <a href="/produse" class="btn-inapoi"><i class="fa-solid fa-arrow-left"></i> Înapoi la Produse</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('../fragmente/footer.ejs') %>
+</body>
+</html>

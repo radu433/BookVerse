@@ -24,6 +24,17 @@
                 <a href="/despre"><i class="fa-solid fa-circle-info"></i> <span>Despre noi</span></a>
             </li>
             <li class="has-submenu">
+                <a href="/produse"><i class="fa-solid fa-layer-group"></i> <span>Produse</span></a>
+                <ul class="submenu">
+                    <li><a href="/produse">toate</a></li>
+                    <% if (locals.categorii) { %>
+                        <% for (let cat of locals.categorii) { %>
+                            <li><a href="/produse?categorie=<%= cat %>"><%= cat %></a></li>
+                        <% } %>
+                    <% } %>
+                </ul>
+            </li>
+            <li class="has-submenu">
                 <a href="#"><i class="fa-solid fa-book"></i> <span>Rafturi</span></a>
                 <ul class="submenu">
                     <li><a href="/produse">Toate Titlurile</a></li> 
@@ -42,6 +53,48 @@
             <li>
                 <a href="/cos"><i class="fa-solid fa-cart-shopping"></i> <span>Coșul meu</span></a> 
             </li>
+            <li class="d-flex align-items-center ms-3">
+                <div class="d-flex align-items-center" style="position: relative; z-index: 2;">
+                    <i id="themeIcon" class="bi bi-sun-fill me-2" style="color: white; font-size: 1.2rem;"></i>
+                    <select id="themeSelect" class="form-select form-select-sm" style="width: auto; cursor: pointer;">
+                        <option value="light">Zi (Light)</option>
+                        <option value="dark">Noapte (Dark)</option>
+                        <option value="abyss">Ocean (Abyss)</option>
+                    </select>
+                </div>
+            </li>
         </ul>
     </nav>
 </header>
+
+<script>
+    // Logică pentru Tema Extinsa (Bonus 2)
+    document.addEventListener("DOMContentLoaded", function() {
+        const themeSelect = document.getElementById("themeSelect");
+        const themeIcon = document.getElementById("themeIcon");
+        const currentTheme = localStorage.getItem("tema") || "light";
+
+        themeSelect.value = currentTheme;
+        applyTheme(currentTheme);
+
+        themeSelect.addEventListener("change", function() {
+            const selectedTheme = themeSelect.value;
+            localStorage.setItem("tema", selectedTheme);
+            applyTheme(selectedTheme);
+        });
+
+        function applyTheme(theme) {
+            if (theme === "light") {
+                document.documentElement.removeAttribute("data-bs-theme");
+                themeIcon.className = "bi bi-sun-fill me-2";
+            } else {
+                document.documentElement.setAttribute("data-bs-theme", theme);
+                if (theme === "dark") {
+                    themeIcon.className = "bi bi-moon-fill me-2";
+                } else if (theme === "abyss") {
+                    themeIcon.className = "bi bi-water me-2";
+                }
+            }
+        }
+    });
+</script>

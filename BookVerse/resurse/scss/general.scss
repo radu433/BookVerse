@@ -9,19 +9,20 @@
   --culoare-uzura: #d9534f;
   --culoare-bonus: #5cb85c;
   --culoare-operator: #888888;
-}
-
-html {
-  font-size: 18px;
-  transition: font-size 0.5s ease-in-out;
-}
-
-body {
+  
   --culoare-body: #F4EFE6;
   --culoare-primara: #2B6777;
   --culoare-zone-grid: #FFFFFF;
   --culoare-contur: #52AB98;
   --culoare-accent: #E27D60;
+
+  /* Header & Footer Variables */
+  --culoare-header-bg: #2B6777;
+  --culoare-header-text: #FFFFFF;
+}
+
+body {
+  
   --margine-pagina: 100px;
   --gap-celule: 20px;
   --padding-egal: 15px;
@@ -29,6 +30,69 @@ body {
   font-family: 'Lora', serif;
   background-color: var(--culoare-body);
   color: var(--culoare-primara);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* DARK THEME - Custom (#1c1a2e) */
+[data-bs-theme="dark"] {
+  /* BookVerse specific variables */
+  --culoare-body: #1c1a2e; /* User requested color */
+  --culoare-primara: #e6e6e6; 
+  --culoare-zone-grid: #25223c; /* Slightly lighter for cards */
+  --culoare-contur: #363354; 
+  --culoare-accent: #6366f1; /* Indigo Accent */
+  --culoare-text-principal: #e6e6e6;
+
+  /* Header & Footer Override */
+  --culoare-header-bg: #1c1a2e;
+  --culoare-header-text: #6366f1; /* Indigo text for BookVerse title */
+
+  /* Bootstrap 5 specific variables */
+  --bs-body-bg: #1c1a2e;
+  --bs-body-color: #e6e6e6;
+  --bs-secondary-bg: #25223c;
+  --bs-tertiary-bg: #2b2845;
+  --bs-border-color: #363354;
+  --bs-border-color-translucent: rgba(99, 102, 241, 0.15);
+  --bs-card-bg: #25223c;
+  --bs-card-border-color: #363354;
+  
+  /* Redefinire culori principale (Primary/Secondary) pentru tema Dark */
+  --bs-primary: #6366f1;
+  --bs-primary-rgb: 99, 102, 241;
+  --bs-secondary: #8b5cf6;
+  --bs-secondary-rgb: 139, 92, 246;
+}
+
+/* THEME 3 - Abyss Blue (Ocean Acvatic) - Bonus 2 */
+[data-bs-theme="abyss"] {
+  /* BookVerse specific variables */
+  --culoare-body: #061524; /* Abyss Deep Blue */
+  --culoare-primara: #e0f2fe; 
+  --culoare-zone-grid: #0a2239; /* Deep Cyan-Blue for cards */
+  --culoare-contur: #143d5f; /* Medium Blue Border */
+  --culoare-accent: #0ea5e9; /* Sky Blue Accent */
+  --culoare-text-principal: #e0f2fe;
+
+  /* Header & Footer Override */
+  --culoare-header-bg: #061524;
+  --culoare-header-text: #0ea5e9; 
+
+  /* Bootstrap 5 specific variables */
+  --bs-body-bg: #061524;
+  --bs-body-color: #e0f2fe;
+  --bs-secondary-bg: #0a2239;
+  --bs-tertiary-bg: #0d2b47;
+  --bs-border-color: #143d5f;
+  --bs-border-color-translucent: rgba(14, 165, 233, 0.15);
+  --bs-card-bg: #0a2239;
+  --bs-card-border-color: #143d5f;
+  
+  /* Redefinire culori principale */
+  --bs-primary: #0ea5e9;
+  --bs-primary-rgb: 14, 165, 233;
+  --bs-secondary: #06b6d4;
+  --bs-secondary-rgb: 6, 182, 212;
 }
 
 /* =========================================
@@ -71,12 +135,18 @@ img, video, iframe, object {
 }
 
 header, footer {
-  background-color: var(--culoare-primara);
+  background-color: var(--culoare-header-bg);
   border: 2px solid var(--culoare-contur);
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   border-radius: 10px;
   padding: var(--padding-egal);
-  color: white;
+  color: var(--culoare-primara);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+header h1, footer h1, header h2, footer h2 {
+  color: var(--culoare-header-text);
+  transition: color 0.4s ease;
 }
 
 /* =========================================

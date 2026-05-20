@@ -8,18 +8,27 @@
 
     <%- include('../fragmente/header.ejs') %>
 
-    <main>
-       <section id="istoric-firma" style="padding: 50px 20px; width: 100%; margin: 40px auto; text-align: center; background-color: var(--cream-paper); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Povestea BookVerse</h2>
-            
-            <p style="font-size: 1.2rem; line-height: 1.6; text-align: justify; margin-bottom: 20px;">
-                BookVerse a luat naștere în 2026 din pasiunea pentru lectură și dintr-o dorință simplă: să facem cărțile mai accesibile pentru toată lumea. Firma noastră virtuală a pornit ca un mic experiment și s-a transformat rapid într-o comunitate a iubitorilor de carte.
-            </p>
-            
-            <p style="font-size: 1.2rem; line-height: 1.6; text-align: justify; margin-bottom: 20px;">
-                Suntem mândri de sistemul nostru unic de <strong>Trade-In</strong>, prin care prelungim viața cărților citite și protejăm mediul înconjurător. Fiecare carte donată sau schimbată la noi își găsește un nou cititor, iar tu ești răsplătit pentru că susții educația!
-            </p>
+    <main class="container my-5" style="display: block;">
+       <section id="istoric-firma" class="card shadow-lg border-0 bg-body-tertiary mx-auto" style="max-width: 900px;">
+            <div class="card-body p-4 p-md-5 text-center">
+                <h2 class="display-4 text-primary font-weight-bold mb-4" style="font-family: 'Lora', serif;">Povestea BookVerse</h2>
+                
+                <p class="lead text-muted text-justify mb-4 border-0 p-0" style="font-size: 1.25rem;">
+                    BookVerse a luat naștere în 2026 din pasiunea pentru lectură și dintr-o dorință simplă: să facem cărțile mai accesibile pentru toată lumea. Firma noastră virtuală a pornit ca un mic experiment și s-a transformat rapid într-o comunitate a iubitorilor de carte.
+                </p>
+                
+                <hr class="w-25 mx-auto mb-4 border-primary">
 
-            <img src="/resurse/imagini/biblioteca-virtuala_large.jpg" alt="Biblioteca BookVerse" style="width: 100%; border-radius: 8px; margin-top: 20px; border: 2px solid var(--culoare-contur);">
+                <p class="lead text-muted text-justify mb-5 border-0 p-0" style="font-size: 1.25rem;">
+                    Suntem mândri de sistemul nostru unic de <strong class="text-secondary">Trade-In</strong>, prin care prelungim viața cărților citite și protejăm mediul înconjurător. Fiecare carte donată sau schimbată la noi își găsește un nou cititor, iar tu ești răsplătit pentru că susții educația!
+                </p>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-8">
+                        <img src="/resurse/imagini/biblioteca-virtuala_large.jpg" alt="Biblioteca BookVerse" class="img-fluid rounded shadow-sm border border-secondary" style="border-width: 3px !important;">
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
